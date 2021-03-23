@@ -31,6 +31,44 @@ int pop(struct Stack* stack){
     }
 }
 
+// função auxiliar da função leitura
+void leitura2(struct Stack* stack,char c[])
+{
+    if (c[0] <= '9' && c[0]>='0'){ // condição que verifica se corresponde a um número ou a um operador
+        push(stack,atoi(c));
+    }
+    else{ // a cada operador faz corresponder a sua função
+        switch (c[0]) {
+            case '%':
+                restoDivisao(stack);
+                break;
+            case '#':
+                expoente(stack);
+                break;
+            case '&':
+                conjuncao(stack);
+                break;
+            case '|':
+                disjuncao(stack);
+                break;
+            case '^':
+                xor(stack);
+                break;
+            case '+':
+                mais(stack);
+                break;
+            case '-': 
+                menos(stack);
+                break;
+            case '*':
+                mult(stack);
+                break;
+            default: 
+                break;
+        } 
+    }
+}
+
 int main() {
     struct Stack stack; //cria uma stack chamada stack
     inicializador(&stack);//adiciona valores iniciais a stack
