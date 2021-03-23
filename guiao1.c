@@ -34,6 +34,7 @@ int pop(struct Stack* stack){
 int main() {
     struct Stack stack; //cria uma stack chamada stack
     inicializador(&stack);//adiciona valores iniciais a stack
+    leitura(&stack);//trata da leitura e processamento dos inputs do user
     for (int i=0; i<stack.comprimento; i++){//mostra o conteudo da stack
         printf("%d ", stack.array[i]);
     }
