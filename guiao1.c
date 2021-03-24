@@ -30,7 +30,15 @@ void inicializador(struct Stack* stack){
     stack->array = (int *) malloc(0 * sizeof(int));//define a array da stack como tendo 0 bits
     stack->comprimento=-1;//proxima pos a guardar passa a 0
 }
-
+//equivalente  a pow da libraria math.h mas para funcionar com int em vez de double
+int powints( int base, int expoente){
+    if (expoente == 0) return 1; //condição de paragens recursiva
+    int ac = powints(base, expoente/2); 
+    if (expoente % 2 == 0)  //algoritmo de calculamento de um numero eleveado a outro
+        return ac* ac;
+    else
+        return (base * ac * ac);
+}
 // equivalente a ++ de c
 void maismais(struct Stack* stack){
     push(stack,pop(stack)+1);
@@ -45,12 +53,30 @@ void menosmenos(struct Stack* stack){
 void mais(struct Stack* stack){
     push(stack,pop(stack)+pop(stack));
 }
-
+// equivalente à subtração de dois valores
+void menos(struct Stack* stack){
+    int a = pop(stack);
+    push(stack,pop(stack)-a);
+}
 // equivalente à multiplicação de dois valores
 void mult(struct Stack* stack){
     push(stack,pop(stack)*pop(stack));
 }
-
+// equivalente à divisão de dois valores
+void divisao(struct Stack* stack){
+    int a=pop(stack);
+    push(stack,pop(stack)/a);
+}
+// equivalente ao resto da divisão de dois valores
+void restoDivisao (struct Stack* stack){
+    int a = pop(stack);
+    push(stack,(pop(stack)%a));
+}
+// equivalente à exponenciação de valores
+void expoente (struct Stack* stack){
+    int a = pop(stack);
+    push(stack,powints(pop(stack),a));
+}
 // equivalente à interseção dos bits correspondentes ao número
 void conjuncao(struct Stack* stack){
    push(stack,pop(stack)&pop(stack));
@@ -95,6 +121,15 @@ void leitura2(struct Stack* stack,char c[])
                 break;
             case '*':
                 mult(stack);
+                break;
+            case '/': 
+                divisao(stack);
+                break;
+            case ')':
+                maismais(stack);
+                break;
+            case '(':
+                menosmenos(stack);
                 break;
             default: 
                 break;
