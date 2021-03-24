@@ -41,6 +41,16 @@ void menosmenos(struct Stack* stack){
     push(stack,pop(stack-1));
 }
 
+// equivalente à soma de dois valores
+void mais(struct Stack* stack){
+    push(stack,pop(stack)+pop(stack));
+}
+
+// equivalente à multiplicação de dois valores
+void mult(struct Stack* stack){
+    push(stack,pop(stack)*pop(stack));
+}
+
 // função auxiliar da função leitura
 void leitura2(struct Stack* stack,char c[])
 {
