@@ -69,6 +69,18 @@ void leitura2(struct Stack* stack,char c[])
     }
 }
 
+//faz o tratamento de dados do input do utilizador
+void leitura (struct Stack* stack){
+    char str[100];
+    scanf("%[^\n]",&str);//lê a linha inserida pelo utilizador e guarda-a em str
+    char* token;
+    char* rest = str; 
+    while ((token = strtok_r(rest, " ", &rest))){ // separa a string por espaçoes e manda para a auxiliar leitura2 cada um dos numeros
+        leitura2(stack,token);
+    }
+
+}
+
 int main() {
     struct Stack stack; //cria uma stack chamada stack
     inicializador(&stack);//adiciona valores iniciais a stack
