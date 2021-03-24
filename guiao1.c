@@ -97,7 +97,8 @@ void not(struct Stack* stack){
 void leitura2(struct Stack* stack,char c[])
 {
     int a=1;
-    for (int i=0;i<strlen(c);i++){
+    unsigned i;
+    for (i=0;i<strlen(c);i++){
         if (c[i] <= '9' && c[i]>='0'){ // condição que verifica se corresponde a um número ou a um operador
             push(stack,atoi(c));
             a=0;
