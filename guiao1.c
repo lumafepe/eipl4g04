@@ -53,15 +53,15 @@ void mult(struct Stack* stack){
 
 // equivalente à interseção dos bits correspondentes ao número
 void conjuncao(struct Stack* stack){
-   push(stack,pop(stack)&&pop(stack));
+   push(stack,pop(stack)&pop(stack));
 }
 // equivalente à disjunção dos bits correspondentes ao número
 void disjuncao(struct Stack* stack){
-    push(stack,pop(stack)||pop(stack));
+    push(stack,pop(stack)|pop(stack));
 }
 // compara bits correspondentes a um número, atribuindo 1 sempre que são distintos
 void xor(struct Stack* stack){
-    push(stack,pop(stack)!=pop(stack));
+    push(stack,pop(stack)^pop(stack));
 }
 
 // função auxiliar da função leitura
