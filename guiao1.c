@@ -31,6 +31,16 @@ int pop(struct Stack* stack){
     }
 }
 
+// equivalente a ++ de c
+void maismais(struct Stack* stack){
+    push(stack,pop(stack)+1);
+}
+
+// equivalente a -- de c
+void menosmenos(struct Stack* stack){
+    push(stack,pop(stack-1));
+}
+
 // função auxiliar da função leitura
 void leitura2(struct Stack* stack,char c[])
 {
