@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 //defenir o data type (nº de elementos e os elementos)
 struct Stack{
