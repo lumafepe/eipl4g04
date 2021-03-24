@@ -89,14 +89,21 @@ void disjuncao(struct Stack* stack){
 void xor(struct Stack* stack){
     push(stack,pop(stack)^pop(stack));
 }
-
+//inverte os bits de um inteiro
+void not(struct Stack* stack){
+    push(stack,~pop(stack));
+}
 // função auxiliar da função leitura
 void leitura2(struct Stack* stack,char c[])
 {
-    if (c[0] <= '9' && c[0]>='0'){ // condição que verifica se corresponde a um número ou a um operador
-        push(stack,atoi(c));
+    int a=1;
+    for (int i=0;i<strlen(c);i++){
+        if (c[i] <= '9' && c[i]>='0'){ // condição que verifica se corresponde a um número ou a um operador
+            push(stack,atoi(c));
+            a=0;
+            break;}
     }
-    else{ // a cada operador faz corresponder a sua função
+    if (a){ // a cada operador faz corresponder a sua função
         switch (c[0]) {
             case '%':
                 restoDivisao(stack);
@@ -131,6 +138,9 @@ void leitura2(struct Stack* stack,char c[])
             case '(':
                 menosmenos(stack);
                 break;
+            case '~':
+                not(stack);
+                break;
             default: 
                 break;
         } 
@@ -139,8 +149,8 @@ void leitura2(struct Stack* stack,char c[])
 
 //faz o tratamento de dados do input do utilizador
 void leitura (struct Stack* stack){
-    char str[100];
-    assert(scanf("%100[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
+    char str[1024];
+    assert(scanf("%1024[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
     char* token;
     char* rest = str; 
     while ((token = strtok_r(rest, " ", &rest))){ // separa a string por espaçoes e manda para a auxiliar leitura2 cada um dos numeros
@@ -158,3 +168,6 @@ int main() {
     printf("\n");
     return 0;
 }
+
+
+
