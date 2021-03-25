@@ -48,57 +48,81 @@ int powints( int base, int expoente){
     else
         return (base * ac * ac);
 }
-// equivalente a ++ de c
+/**
+* \brief equivalente a ++ de c.
+*/
 void maismais(struct Stack* stack){
     push(stack,pop(stack)+1);
 }
 
-// equivalente a -- de c
+/**
+* \brief equivalente a -- de c.
+*/
 void menosmenos(struct Stack* stack){
     push(stack,pop(stack)-1);
 }
 
-// equivalente à soma de dois valores
+/**
+* \brief equivalente à soma de dois valores.
+*/
 void mais(struct Stack* stack){
     push(stack,pop(stack)+pop(stack));
 }
-// equivalente à subtração de dois valores
+/**
+* \brief equivalente à subtração de dois valores.
+*/
 void menos(struct Stack* stack){
     int a = pop(stack);
     push(stack,pop(stack)-a);
 }
-// equivalente à multiplicação de dois valores
+/**
+* \brief equivalente à multiplicação de dois valores.
+*/
 void mult(struct Stack* stack){
     push(stack,pop(stack)*pop(stack));
 }
-// equivalente à divisão de dois valores
+/**
+* \brief equivalente à divisão de dois valores.
+*/
 void divisao(struct Stack* stack){
     int a=pop(stack);
     push(stack,pop(stack)/a);
 }
-// equivalente ao resto da divisão de dois valores
+/**
+* \brief equivalente ao resto divisão de dois valores.
+*/
 void restoDivisao (struct Stack* stack){
     int a = pop(stack);
     push(stack,(pop(stack)%a));
 }
-// equivalente à exponenciação de valores
+/**
+ * \brief equivalente à exponenciação de valores.
+*/
 void expoente (struct Stack* stack){
     int a = pop(stack);
     push(stack,powints(pop(stack),a));
 }
-// equivalente à interseção dos bits correspondentes ao número
+/**
+ * \brief equivalente à interseção dos bits correspondentes ao número.
+*/
 void conjuncao(struct Stack* stack){
    push(stack,pop(stack)&pop(stack));
 }
-// equivalente à disjunção dos bits correspondentes ao número
+/**
+ * \brief equivalente à disjunção dos bits correspondentes ao número.
+*/
 void disjuncao(struct Stack* stack){
     push(stack,pop(stack)|pop(stack));
 }
-// compara bits correspondentes a um número, atribuindo 1 sempre que são distintos
+/**
+ * \brief compara bits correspondentes a um número, atribuindo 1 sempre que são distintos.
+*/
 void xor(struct Stack* stack){
     push(stack,pop(stack)^pop(stack));
 }
-//inverte os bits de um inteiro
+/**
+ * \brief inverte os bits de um inteiro.
+*/
 void not(struct Stack* stack){
     push(stack,~pop(stack));
 }
