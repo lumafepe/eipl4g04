@@ -39,7 +39,10 @@ void inicializador(struct Stack* stack){
     stack->comprimento=-1; /**< inicia o topo da array como na posição -1 */
 }
 
-//equivalente  a pow da libraria math.h mas para funcionar com int em vez de double
+/**
+ * \brief equivalente  a pow da libraria math.h mas para funcionar com int em vez de double.
+ * @return número resultante da base elevada ao expoente
+*/
 int powints( int base, int expoente){
     if (expoente == 0) return 1; //condição de paragens recursiva
     int ac = powints(base, expoente/2); 
@@ -126,7 +129,11 @@ void xor(struct Stack* stack){
 void not(struct Stack* stack){
     push(stack,~pop(stack));
 }
-// função auxiliar da função leitura
+/**
+ * Função auxiliar da função leitura
+ * Esta função, dadas strings, distingue aquelas que são constituidas por inteiros daquelas constituidas por um operador
+ * No caso de se verificar a presença de uma string constituida por inteiros esta tranforma-a num número inteiro (atoi) e adiciona-o ao topo da stack, caso contrário, realiza a função do operador em questão
+*/
 void leitura2(struct Stack* stack,char c[])
 {
     int a=1;
@@ -181,7 +188,10 @@ void leitura2(struct Stack* stack,char c[])
     }
 }
 
-//faz o tratamento de dados do input do utilizador
+/**
+ * Esta é a função que trata da leitura do input do user
+ * Esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
+*/
 void leitura (struct Stack* stack){
     char str[1024];
     assert(scanf("%1024[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
