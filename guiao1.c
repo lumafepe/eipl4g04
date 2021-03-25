@@ -77,24 +77,34 @@ void restoDivisao (struct Stack* stack){
     int a = pop(stack);
     push(stack,(pop(stack)%a));
 }
-// equivalente à exponenciação de valores
+/**
+ * \brief equivalente à exponenciação de valores.
+*/
 void expoente (struct Stack* stack){
     int a = pop(stack);
     push(stack,powints(pop(stack),a));
 }
-// equivalente à interseção dos bits correspondentes ao número
+/**
+ * \brief equivalente à interseção dos bits correspondentes ao número.
+*/
 void conjuncao(struct Stack* stack){
    push(stack,pop(stack)&pop(stack));
 }
-// equivalente à disjunção dos bits correspondentes ao número
+/**
+ * \brief equivalente à disjunção dos bits correspondentes ao número.
+*/
 void disjuncao(struct Stack* stack){
     push(stack,pop(stack)|pop(stack));
 }
-// compara bits correspondentes a um número, atribuindo 1 sempre que são distintos
+/**
+ * \brief compara bits correspondentes a um número, atribuindo 1 sempre que são distintos.
+*/
 void xor(struct Stack* stack){
     push(stack,pop(stack)^pop(stack));
 }
-//inverte os bits de um inteiro
+/**
+ * \brief inverte os bits de um inteiro.
+*/
 void not(struct Stack* stack){
     push(stack,~pop(stack));
 }
