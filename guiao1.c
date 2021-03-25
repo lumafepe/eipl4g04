@@ -39,7 +39,10 @@ void inicializador(struct Stack* stack){
     stack->comprimento=-1; /**< inicia o topo da array como na posição -1 */
 }
 
-//equivalente  a pow da libraria math.h mas para funcionar com int em vez de double
+/**
+ * \brief equivalente  a pow da libraria math.h mas para funcionar com int em vez de double.
+ * @return número resultante da base elevada ao expoente
+*/
 int powints( int base, int expoente){
     if (expoente == 0) return 1; //condição de paragens recursiva
     int ac = powints(base, expoente/2); 
@@ -185,7 +188,10 @@ void leitura2(struct Stack* stack,char c[])
     }
 }
 
-//faz o tratamento de dados do input do utilizador
+/**
+ * Esta é a função que trata da leitura do input do user
+ * Esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
+*/
 void leitura (struct Stack* stack){
     char str[1024];
     assert(scanf("%1024[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
