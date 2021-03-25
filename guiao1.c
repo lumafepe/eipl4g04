@@ -3,14 +3,14 @@
 #include <string.h>
 #include <assert.h>
 /**
- * /brief defenir o data type (nº de elementos e os elementos) 
+ * \brief defenir o data type (nº de elementos e os elementos).
 */
 struct Stack{
-    int comprimento; //pos do topo
-    int *array; // onde os valores sao guardada
+    int comprimento; /**< representa a posição do topo da stack */
+    int *array; /**< lugar onde os valores vão ser guardados */
 };
 /**
- * /brief aumenta o tamanho da array e adiciona o elemento no inicio da array
+ * \brief aumenta o tamanho da array e adiciona o elemento no inicio da array.
 */
 void push(struct Stack* stack,int eaa){ // eaa --> elemento a adicionar
     stack->comprimento++; //aumenta a pos do topo
@@ -19,7 +19,8 @@ void push(struct Stack* stack,int eaa){ // eaa --> elemento a adicionar
 }
 
 /**
- * /brief diminui o tamanho da array e devolve o que esta no topo
+ * \brief diminui o tamanho da array e devolve o que esta no topo.
+ * @return elemento no topo da stack
 */
 int pop(struct Stack* stack){
     if (stack->comprimento>=0){//verificar que tem elementos
@@ -30,11 +31,14 @@ int pop(struct Stack* stack){
     } else return 0;
 }
 
-// para dar valores iniciais a stack
+/**
+ * \brief para dar valores iniciais a stack.
+*/
 void inicializador(struct Stack* stack){
-    stack->array = (int *) malloc(0 * sizeof(int));//define a array da stack como tendo 0 bits
-    stack->comprimento=-1;//proxima pos a guardar passa a 0
+    stack->array = (int *) malloc(0 * sizeof(int)); /**< inicia o tamanho da array onde os dados vao ser guardados como 0 */
+    stack->comprimento=-1; /**< inicia o topo da array como na posição -1 */
 }
+
 //equivalente  a pow da libraria math.h mas para funcionar com int em vez de double
 int powints( int base, int expoente){
     if (expoente == 0) return 1; //condição de paragens recursiva
