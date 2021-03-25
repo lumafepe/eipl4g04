@@ -186,7 +186,7 @@ void leitura2(struct Stack* stack,char c[])
 
 /**
  * Esta é a função que trata da leitura do input do user
- * esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
+ * Esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
 */
 void leitura (struct Stack* stack){
     char str[1024];
