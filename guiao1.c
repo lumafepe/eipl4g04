@@ -1,16 +1,21 @@
+/**
+ * @file ficheiro principal do programa
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
 /**
- * \brief defenir o data type (nº de elementos e os elementos).
+ * \brief definir o data type (nº de elementos e os elementos).
 */
 struct Stack{
     int comprimento; /**< representa a posição do topo da stack */
     int *array; /**< lugar onde os valores vão ser guardados */
 };
+
 /**
- * \brief aumenta o tamanho da array e adiciona o elemento no inicio da array.
+ * \brief aumenta o tamanho da stack e adiciona o elemento ao inicio da array.
 */
 void push(struct Stack* stack,int eaa){ // eaa --> elemento a adicionar
     stack->comprimento++; //aumenta a pos do topo
@@ -19,7 +24,7 @@ void push(struct Stack* stack,int eaa){ // eaa --> elemento a adicionar
 }
 
 /**
- * \brief diminui o tamanho da array e devolve o que esta no topo.
+ * \brief diminui o tamanho da stack e devolve o que estava no topo.
  * @return elemento no topo da stack
 */
 int pop(struct Stack* stack){
@@ -32,7 +37,7 @@ int pop(struct Stack* stack){
 }
 
 /**
- * \brief para dar valores iniciais a stack.
+ * \brief serve para dar valores iniciais a stack.
 */
 void inicializador(struct Stack* stack){
     stack->array = (int *) malloc(0 * sizeof(int)); /**< inicia o tamanho da array onde os dados vao ser guardados como 0 */
@@ -40,7 +45,7 @@ void inicializador(struct Stack* stack){
 }
 
 /**
- * \brief equivalente  a pow da libraria math.h mas para funcionar com int em vez de double.
+ * \brief equivalente a pow da libraria math.h mas para funcionar com int em vez de double.
  * @return número resultante da base elevada ao expoente
 */
 int powints( int base, int expoente){
@@ -85,14 +90,14 @@ void mult(struct Stack* stack){
     push(stack,pop(stack)*pop(stack));
 }
 /**
-* \brief equivalente à divisão de dois valores.
+* \brief equivalente à divisão inteira de dois valores.
 */
 void divisao(struct Stack* stack){
     int a=pop(stack);
     push(stack,pop(stack)/a);
 }
 /**
-* \brief equivalente ao resto divisão de dois valores.
+* \brief equivalente ao resto divisão inteira de dois valores.
 */
 void restoDivisao (struct Stack* stack){
     int a = pop(stack);
@@ -131,7 +136,7 @@ void not(struct Stack* stack){
 }
 /**
  * Função auxiliar da função leitura
- * Esta função, dadas strings, distingue aquelas que são constituidas por inteiros daquelas constituidas por um operador
+ * Esta função, dada uma string, distingue se é constituida por inteiros ou constituida por um operador
  * No caso de se verificar a presença de uma string constituida por inteiros esta tranforma-a num número inteiro (atoi) e adiciona-o ao topo da stack, caso contrário, realiza a função do operador em questão
 */
 void leitura2(struct Stack* stack,char c[])
@@ -190,7 +195,7 @@ void leitura2(struct Stack* stack,char c[])
 
 /**
  * Esta é a função que trata da leitura do input do user
- * Esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
+ * Esta separa-o por espaços e a cada conjunto de elemento envia-os para a leitura2 para serem processados
 */
 void leitura (struct Stack* stack){
     char str[1024];
@@ -204,7 +209,7 @@ void leitura (struct Stack* stack){
 /**
  * Esta é a função principal do nosso guião
  * Chama as funções que constituem o nosso trabalho desde a chamada da stack para o armazenazamento dos inputs dados pelo utilizador ao cálculo das operações pedidas
- * Mostra também conteúdo existente na stack
+ * Mostra também o conteúdo existente na stack
  * @return 0
  */
 int main() {
