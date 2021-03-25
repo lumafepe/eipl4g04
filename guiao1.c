@@ -2,20 +2,25 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
-//defenir o data type (nº de elementos e os elementos)
+/**
+ * /brief defenir o data type (nº de elementos e os elementos) 
+*/
 struct Stack{
     int comprimento; //pos do topo
     int *array; // onde os valores sao guardada
 };
-// aumenta o tamanho da array e adiciona o elemento no inicio da array
+/**
+ * /brief aumenta o tamanho da array e adiciona o elemento no inicio da array
+*/
 void push(struct Stack* stack,int eaa){ // eaa --> elemento a adicionar
     stack->comprimento++; //aumenta a pos do topo
     stack->array = realloc(stack->array,(stack->comprimento+1) * sizeof(int)); // aumenta o tamanho da array
     stack->array[stack->comprimento]=eaa; // guarda o novo valor na array
 }
 
-// diminui o tamanho da array e devolve o que esta no topo
+/**
+ * /brief diminui o tamanho da array e devolve o que esta no topo
+*/
 int pop(struct Stack* stack){
     if (stack->comprimento>=0){//verificar que tem elementos
         int a = stack->array[stack->comprimento]; // valor a devolver
