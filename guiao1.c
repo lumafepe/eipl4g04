@@ -191,7 +191,12 @@ void leitura (struct Stack* stack){
         leitura2(stack,token);
     }
 }
-
+/**
+ * Esta é a função principal do nosso guião
+ * Chama as funções que constituem o nosso trabalho desde a chamada da stack para o armazenazamento dos inputs dados pelo utilizador ao cálculo das operações pedidas
+ * Mostra também conteúdo existente na stack
+ * @return 0
+ */
 int main() {
     struct Stack stack; //cria uma stack chamada stack
     inicializador(&stack);//adicona valores iniciais a stack
