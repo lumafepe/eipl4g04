@@ -181,7 +181,10 @@ void leitura2(struct Stack* stack,char c[])
     }
 }
 
-//faz o tratamento de dados do input do utilizador
+/**
+ * Esta é a função que trata da leitura do input do user
+ * esta separa-o por espaços e a cada conjunto de elemento eniva-os para a leitura2 para serem processados
+*/
 void leitura (struct Stack* stack){
     char str[1024];
     assert(scanf("%1024[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
