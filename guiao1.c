@@ -126,7 +126,11 @@ void xor(struct Stack* stack){
 void not(struct Stack* stack){
     push(stack,~pop(stack));
 }
-// função auxiliar da função leitura
+/**
+ * Função auxiliar da função leitura
+ * Esta função, dadas strings, distingue aquelas que são constituidas por inteiros daquelas constituidas por um operador
+ * No caso de se verificar a presença de uma string constituida por inteiros esta tranforma-a num número inteiro (atoi) e adiciona-o ao topo da stack, caso contrário, realiza a função do operador em questão
+*/
 void leitura2(struct Stack* stack,char c[])
 {
     int a=1;
