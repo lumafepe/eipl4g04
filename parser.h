@@ -45,3 +45,18 @@ int leituraOperacoesConversoes(Stack stack,char c);
  * @param c caracteres a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
+int leituraOperacoesCondicionais(Stack stack,char c[]);
+
+
+/**
+ * @param stack é a stack onde os valores estão guardados
+ * @param c caracteres a processar
+*/
+void leitura2(Stack stack,char c[]);
+
+/**
+ * @param stack é a stack onde os valores estão guardados
+*/
+void leitura (Stack stack);
+
+#endif
