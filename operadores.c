@@ -17,17 +17,17 @@
 void maismais(Stack stack){
     struct stack_elemento a = pop(stack);
     switch (a.tipo){
-        case STACK_DOUBLE:
-            push(stack,a.tipo,(a.data.val_d+1.0));
-            break;
-        case STACK_LONG:
-            push(stack,a.tipo,(a.data.val_l+1));
-            break;
-        case STACK_CHAR:
-            push(stack,a.tipo,(a.data.val_c+1));
-            break;
-        default:
-            break;
+    case STACK_DOUBLE:
+        push(stack,a.tipo,(a.data.val_d+1.0));
+        break;
+    case STACK_LONG:
+        push(stack,a.tipo,(a.data.val_l+1));
+        break;
+    case STACK_CHAR:
+        push(stack,a.tipo,(a.data.val_c+1));
+        break;
+    default:
+        break;
     }
 }
 
@@ -38,16 +38,16 @@ void menosmenos(Stack stack){
     struct stack_elemento a = pop(stack);
     switch (a.tipo)
     {
-        case STACK_DOUBLE:
-            push(stack,a.tipo,(a.data.val_d-1));
-            break;
-        case STACK_LONG:
-            push(stack,a.tipo,(a.data.val_l-1));
-            break;
-        case STACK_CHAR:
-            push(stack,a.tipo,(a.data.val_c-1));
-        default:
-            break;
+    case STACK_DOUBLE:
+        push(stack,a.tipo,(a.data.val_d-1));
+        break;
+    case STACK_LONG:
+        push(stack,a.tipo,(a.data.val_l-1));
+        break;
+    case STACK_CHAR:
+        push(stack,a.tipo,(a.data.val_c-1));
+    default:
+        break;
     }
 }
 /**
@@ -89,7 +89,7 @@ void menos(Stack stack){
 
 /**
  * \brief equivalente à multiplicação de dois valores.
-*/
+*/ 
 void mult(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
@@ -120,7 +120,7 @@ void expoente (Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long) (pow((double) toD(b),(double) toD(a))));
-    else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));
+    else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));    
 }
 /**
  * \brief equivalente à interseção dos bits correspondentes ao número.
@@ -275,8 +275,96 @@ void convC (Stack stack){
  */
 void maior(Stack stack){
     struct stack_elemento a = pop(stack);
-    struct stack_elemento b = pop(stack);/**
- * @file ficheiro onde se encontram todos os operadores do nosso programa.
+    struct stack_elemento b = pop(stack);
+    push(stack,STACK_LONG,toD(b)>toD(a));
+}
+/**
+ * \brief função que nos dá o menor de dois numeros existentes na stack(em binário).
  */
-#include <stdlib.h>
-#include <string.h>
+void menor(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    push(stack,STACK_LONG,toD(b)<toD(a));
+}
+/**
+ * \brief função que nos dá o maior de dois numeros existentes na stack(sem binário).
+ */
+void maiorb(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    if (toD(b)>toD(a)) pushdata(stack,b);
+    else pushdata(stack,a);
+}
+
+/**
+* \brief função que nos dá o menor de dois numeros existentes na stack(sem binário).  
+*/
+void menorb(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    if (toD(b)<toD(a)) pushdata(stack,b);
+    else pushdata(stack,a);
+}
+
+/**
+* \brief função que vai buscar 2 elementos ao topo da stack, se ambos forem falsos, retorna 0 , caso contrário, devolve o segundo.
+*/
+void ou(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    if ( a.data.val_l||b.data.val_l ){
+        if (b.data.val_l) pushdata(stack,b);
+        else pushdata(stack,a);
+    }
+    else pushdata(stack,a);
+}
+/**
+* \brief função que vai buscar 2 elementos ao topo da stack, se um deles for falso, retorna 0 , caso contrário, devolve o primeiro.  
+*/
+void e(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    if ( a.data.val_l&&b.data.val_l ) pushdata(stack,a);
+    else push(stack,STACK_LONG,0);
+}
+/**
+* \brief função que vai buscar ao topo da stack 3 elementos, se o elemento que estiver em terceiro lugar for verdadeiro, então coloca na stack o segundo, caso contrário coloca o primeiro.  
+*/
+void ifthenelse(Stack stack){
+    struct stack_elemento e = pop(stack);
+    struct stack_elemento t = pop(stack);
+    struct stack_elemento i = pop(stack);
+    if(i.data.val_l) pushdata(stack,t);
+    else pushdata(stack,e);
+}
+
+/**
+* \brief função que vai buscar ao topo da stack dois números e verifica se estes são iguais.  
+*/
+void igual(Stack stack ){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    push(stack,STACK_LONG,toD(b)==toD(a));
+}
+
+/**
+* \brief função que vai buscar ao topo da stack um número e se este for diferente de 0 devolve o próprio 0 e, caso contrário, devolve 1.  
+*/
+void notb(Stack stack){
+    struct stack_elemento t = pop(stack);
+    push(stack,STACK_LONG,!t.data.val_l);
+}
+
+/**
+* \brief pega numa variável e transforma-o num elemento da stack.  
+*/
+void var2stack(Stack stack,char s){
+    pushdata(stack,stack->variaveis[s-65]);
+}
+
+/**
+ * \brief pega no elemento do topo da stack e transforma-o numa variável. 
+*/
+void stack2var(Stack stack,char s){
+    stack->variaveis[s-65]=stack->elemento[stack->comprimento];
+}
