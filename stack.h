@@ -6,10 +6,10 @@
  * @brief Tipo de cada elemento da stack.
  */
 enum stack_tipo{
-    STACK_CHAR,
-    STACK_LONG,
-    STACK_DOUBLE,
-    STACK_STRING
+    STACK_CHAR, /**< representa o tipo de uma char */
+    STACK_LONG, /**< representa o tipo de uma long */
+    STACK_DOUBLE, /**< representa o tipo de uma double */
+    STACK_STRING /**< representa o tipo de uma string */
 };
 
 /**
