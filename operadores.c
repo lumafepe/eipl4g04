@@ -177,3 +177,39 @@ void convL (Stack stack){
         default:
             fprintf(stderr,"Erro em convL");exit(EXIT_FAILURE);
     }
+}
+/**
+ * \brief função que converte os tipos existentes em double.
+ */
+void convD (Stack stack){
+    struct stack_elemento a = pop(stack);
+    switch(a.tipo){
+        case STACK_CHAR:
+            push(stack,STACK_DOUBLE,(double)a.data.val_c);break;
+        case STACK_LONG:
+            push(stack,STACK_DOUBLE,1.0*a.data.val_l);break;
+        case STACK_DOUBLE:
+            push(stack,STACK_DOUBLE,a.data.val_d);break;
+        case STACK_STRING:
+            push(stack,STACK_DOUBLE,atof(a.data.val_s));break;
+        default:
+            fprintf(stderr,"Erro em convD");
+            exit(EXIT_FAILURE);
+    }
+}
+/**
+ * \brief função que converte os tipos existentes em char.
+ */
+void convC (Stack stack){
+    struct stack_elemento a = pop(stack);
+    switch(a.tipo){
+        case STACK_CHAR:
+            push(stack,STACK_CHAR,a.data.val_c);break;
+        case STACK_LONG:
+            push(stack,STACK_CHAR,(char)a.data.val_l);break;
+        default:
+            fprintf(stderr,"Erro em convC");exit(EXIT_FAILURE);
+    }
+}
+#define maiormenorigual(stack, op){\
+    struct stack_elemento a = pop(stack);\
