@@ -66,3 +66,13 @@ void destroy(Stack stack);
 enum stack_tipo peek(Stack stack);
 /**
  * @param stack a verificar se esta vazia
+ * @return 1 se stack esta vazia e 0 caso contrário.
+ */
+bool stack_is_empty(Stack stack);
+/** 
+ * @param stack onde remover o topo
+ * @return elemnto que estava no topo da stack
+ */
+struct stack_elemento pop(Stack stack);
+void print_stack(Stack stack);/** @param stack a imprimir*/
+#endif 
