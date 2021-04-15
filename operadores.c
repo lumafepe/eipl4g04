@@ -213,3 +213,39 @@ void convC (Stack stack){
 }
 #define maiormenorigual(stack, op){\
     struct stack_elemento a = pop(stack);\
+    struct stack_elemento b = pop(stack);\
+    push(stack,STACK_LONG,toD(b) op toD(a));\
+}
+/**
+* \brief função que vai buscar ao topo da stack dois números e verifica se estes são iguais.  
+*/
+void igual(Stack stack ){
+    maiormenorigual(stack,==);
+}
+/**
+ * \brief função que nos dá o maior de dois numeros existentes na stack(em binário).
+ */
+void maior(Stack stack){
+    maiormenorigual(stack,>);
+}
+/**
+ * \brief função que nos dá o menor de dois numeros existentes na stack(em binário).
+ */
+void menor(Stack stack){
+    maiormenorigual(stack,<);
+}
+#define maiorbmenorb(stack, op){\
+    struct stack_elemento a = pop(stack);\
+    struct stack_elemento b = pop(stack);\
+    pushdata(stack,(toD(b) op toD(a)?b:a));\
+}
+/**
+ * \brief função que nos dá o maior de dois numeros existentes na stack(sem binário).
+ */
+void maiorb(Stack stack){
+    maiorbmenorb(stack,>);
+}
+/**
+* \brief função que nos dá o menor de dois numeros existentes na stack(sem binário).  
+*/
+void menorb(Stack stack){
