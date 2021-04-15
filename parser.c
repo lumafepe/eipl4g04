@@ -158,30 +158,23 @@ int leituraOperacoesCondicionais(Stack stack,char c[]){
     switch (c[0]) {
         case '?':
             ifthenelse(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '=':
             igual(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '<':
             menor(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '>':
             maior(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '!':
             notb(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case 'e':
             leituraE(stack,c[1]);
-            Bool=1;
-            break;
-        default:
-            break;
+            Bool=1;break;
+        default:break;
     }
     return Bool;
 }
