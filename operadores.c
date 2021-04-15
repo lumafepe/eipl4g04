@@ -249,3 +249,43 @@ void maiorb(Stack stack){
 * \brief função que nos dá o menor de dois numeros existentes na stack(sem binário).  
 */
 void menorb(Stack stack){
+    maiorbmenorb(stack,<);
+}
+/**
+* \brief função que vai buscar 2 elementos ao topo da stack, se ambos forem falsos, retorna 0 , caso contrário, devolve o segundo.
+*/
+void ou(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    pushdata(stack,(b.data.val_l?b:a));
+}
+/**
+* \brief função que vai buscar 2 elementos ao topo da stack, se um deles for falso, retorna 0 , caso contrário, devolve o primeiro.  
+*/
+void e(Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    if (toD(a)&&toD(b)) pushdata(stack,a);
+    else push(stack,STACK_LONG,0);
+}
+/**
+* \brief função que vai buscar ao topo da stack 3 elementos, se o elemento que estiver em terceiro lugar for verdadeiro, então coloca na stack o segundo, caso contrário coloca o primeiro.  
+*/
+void ifthenelse(Stack stack){
+    struct stack_elemento e = pop(stack);
+    struct stack_elemento t = pop(stack);
+    struct stack_elemento i = pop(stack);
+    pushdata(stack,(i.data.val_l?t:e));
+}
+/**
+* \brief pega numa variável e transforma-o num elemento da stack.  
+*/
+void var2stack(Stack stack,char s){
+    pushdata(stack,stack->variaveis[s-65]);
+}
+/**
+ * \brief pega no elemento do topo da stack e transforma-o numa variável. 
+*/
+void stack2var(Stack stack,char s){
+    stack->variaveis[s-65]=stack->elemento[stack->comprimento];
+}
