@@ -21,10 +21,10 @@ enum stack_tipo{
 struct stack_elemento{
     enum stack_tipo tipo;
     union {
-        char val_c;
-        long val_l;
-        double val_d;
-        char* val_s;
+        char val_c;/**< onde char's ficam guardadas */
+        long val_l;/**< onde long's ficam guardadas */
+        double val_d;/**< onde double's ficam guardadas */
+        char* val_s;/**< onde string's ficam guardadas */
     }data;
 };
 
