@@ -67,36 +67,28 @@ int leituraOperacoesContas(Stack stack,char c){
     switch (c) {
         case '%':
             restoDivisao(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '#':
             expoente(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '+':
             mais(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '-': 
             menos(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '*':
             mult(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '/': 
             divisao(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case ')':
             maismais(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
         case '(':
             menosmenos(stack);
-            Bool=1;
-            break;
+            Bool=1;break;
     }
     return Bool;
 }
