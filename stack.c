@@ -18,20 +18,15 @@ void push(Stack stack,const enum stack_tipo tipo,...){
     va_start(ap, tipo);
     switch(tipo){
         case STACK_CHAR:
-            stack->elemento[stack->comprimento].data.val_c = (char) va_arg(ap, int);
-            break;
+            stack->elemento[stack->comprimento].data.val_c = (char) va_arg(ap, int);break;
         case STACK_LONG:
-            stack->elemento[stack->comprimento].data.val_l = va_arg(ap, long);
-            break;
+            stack->elemento[stack->comprimento].data.val_l = va_arg(ap, long);break;
         case STACK_DOUBLE:
-            stack->elemento[stack->comprimento].data.val_d = va_arg(ap, double);
-            break;
+            stack->elemento[stack->comprimento].data.val_d = va_arg(ap, double);break;
         case STACK_STRING:
-            stack->elemento[stack->comprimento].data.val_s = va_arg(ap, char *);
-            break;
+            stack->elemento[stack->comprimento].data.val_s = va_arg(ap, char *);break;
         default:
-            fprintf(stderr,"erro");
-            exit(EXIT_FAILURE);
+            fprintf(stderr,"erro");exit(EXIT_FAILURE);
     }
     stack->elemento[stack->comprimento].tipo=tipo;
     va_end(ap);
