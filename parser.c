@@ -182,3 +182,34 @@ void leitura2(Stack stack,char c[]){
     int a=1;
     unsigned i;
     for (i=0;i<strlen(c);i++){
+        if (c[i] == '.'){ // condição que verifica se corresponde a um número ou a um operador
+            push(stack,STACK_DOUBLE,atof(c));
+            a=0;break;
+        }
+    }
+    if (a){
+        for (i=0;i<strlen(c);i++){
+            if (c[i] <= '9' && c[i]>='0'){ // condição que verifica se corresponde a um número ou a um operador
+                push(stack,STACK_LONG,atoi(c));
+                a=0;break;
+            }
+        }
+    }
+    if (a){ // a cada operador faz corresponder a sua função
+        if (c[0]<='Z' && c[0]>='A') var2stack(stack,c[0]);
+        else leituraCasos(stack,c);
+    }    
+}
+/**
+ * Esta é a função que trata da leitura do input do user
+ * Esta separa-o por espaços e a cada conjunto de elemento envia-os para a leitura2 para serem processados
+*/
+void leitura (Stack stack){
+    char str[1024];
+    assert(scanf("%1024[^\n]",str)==1);//lê a linha inserida pelo utilizador e guarda-a em str
+    char* token;
+    char* rest = str; 
+    while ((token = strtok_r(rest, " ", &rest))){ // separa a string por espaçoes e manda para a auxiliar leitura2 cada um dos numeros
+        leitura2(stack,token);
+    }
+}
