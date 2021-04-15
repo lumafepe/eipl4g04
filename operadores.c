@@ -141,3 +141,39 @@ void trocar (Stack stack){
     pushdata(stack,a);
     pushdata(stack,b);
 }
+/**
+ * \brief Roda três elementos da stack.
+ */
+void rodar (Stack stack){
+    struct stack_elemento p1 = pop(stack);
+    struct stack_elemento p2 = pop(stack);
+    struct stack_elemento p3 = pop(stack);
+    pushdata (stack,p2);
+    pushdata (stack,p1);
+    pushdata (stack,p3);
+}
+/**
+ * \brief duplica um elemento da stack.
+ */
+void duplica(Stack stack){
+    struct stack_elemento p1 = pop(stack);
+    pushdata (stack,p1);
+    pushdata (stack,p1);
+}
+/**
+ * \brief função que converte os tipos existentes para long.
+ */
+void convL (Stack stack){
+    struct stack_elemento a = pop(stack);
+    switch(a.tipo){
+        case STACK_CHAR:
+            push(stack,STACK_LONG,(long int)a.data.val_c);break;
+        case STACK_LONG:
+            push(stack,STACK_LONG,a.data.val_l);break;
+        case STACK_DOUBLE:
+            push(stack,STACK_LONG,(long int )a.data.val_d);break;
+        case STACK_STRING:
+            push(stack,STACK_LONG,atol(a.data.val_s));break;
+        default:
+            fprintf(stderr,"Erro em convL");exit(EXIT_FAILURE);
+    }
