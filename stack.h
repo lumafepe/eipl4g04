@@ -2,7 +2,8 @@
 #define STACK_H_
 #include <stdbool.h>
 /**
- * \brief Tipo de cada elemento da stack.
+ * @enum stack_tipo
+ * @brief Tipo de cada elemento da stack.
  */
 enum stack_tipo{
     STACK_CHAR,
@@ -12,7 +13,10 @@ enum stack_tipo{
 };
 
 /**
- * \brief Tipo e valor de cada elemento da stack.
+ * @struct stack_elemento
+ * @brief Tipo e valor de cada elemento da stack.
+ * @var tipo: Tipo de cada elemento da stack.
+ * @var data: Membro que contem os valores guardados na stack
  */
 struct stack_elemento{
     enum stack_tipo tipo;
@@ -25,17 +29,19 @@ struct stack_elemento{
 };
 
 /**
- * \brief Representa a estrutura da stack desde as suas posições até ao lugar onde os inputs vão ser guardados.
+ * @struct stack
+ * @brief Representa a estrutura da stack desde as suas posições até ao lugar onde os inputs vão ser guardados.
  */
 struct stack{
     int comprimento; /**< representa a posição do topo da stack */
-    struct stack_elemento * elemento; /**< lugar onde os valores vão ser guardados */
-    struct stack_elemento variaveis[26];
+    struct stack_elemento * elemento; /**< lugar onde os valores e os seus tipo vão ser guardados */
+    struct stack_elemento variaveis[26];/**< lugar onde os valores das variaveis vão ser guardados */
 };
 
 /**
- * \brief Define o tipo da stack.
-*/
+ * @typedef Stack
+ * @brief Define o tipo da stack.
+ */
 typedef struct stack * Stack;
 
 /**
