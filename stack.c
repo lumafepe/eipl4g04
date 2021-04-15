@@ -120,7 +120,7 @@ struct stack_elemento pop(Stack stack){
 }
 
 /**
- * Função responsável por imprimir os elementos da stack.
+ * @brief Função responsável por imprimir os elementos da stack.
  */
 void print_stack(Stack stack){
     for (int i =0;i<=stack->comprimento;i++){

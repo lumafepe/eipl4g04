@@ -25,7 +25,7 @@ struct stack_elemento{
         long val_l;/**< onde long's ficam guardadas */
         double val_d;/**< onde double's ficam guardadas */
         char* val_s;/**< onde string's ficam guardadas */
-    }data;
+    }data;/**< union onde os valores serão guardados */
 };
 
 /**
