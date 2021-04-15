@@ -81,3 +81,63 @@ void restoDivisao (Stack stack){
 void expoente (Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
+    if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long) (pow(toD(b),toD(a))));
+    else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));    
+}
+#define contasbinarias(stack, op){\
+        struct stack_elemento a = pop(stack);\
+    struct stack_elemento b = pop(stack);\
+    push(stack,STACK_LONG,(b.data.val_l op a.data.val_l));\
+}
+/**
+ * \brief equivalente à interseção dos bits correspondentes ao número.
+*/
+void conjuncao(Stack stack){
+    contasbinarias(stack,&);
+}
+/**
+ * \brief equivalente à disjunção dos bits correspondentes ao número.
+*/
+void disjuncao(Stack stack){
+    contasbinarias(stack,|);
+}
+/**
+ * \brief compara bits correspondentes a um número, atribuindo 1 sempre que são distintos.
+*/
+void xor(Stack stack){
+    contasbinarias(stack,^);
+}
+#define notg(stack, op){\
+    struct stack_elemento b = pop(stack);\
+    push(stack,STACK_LONG,(op b.data.val_l));\
+}
+/**
+ * \brief inverte os bits de um inteiro.
+*/
+void not(Stack stack){
+    notg(stack,~);
+}
+/**
+* \brief função que vai buscar ao topo da stack um número e se este for diferente de 0 devolve o próprio 0 e, caso contrário, devolve 1.  
+*/
+void notb(Stack stack){
+    notg(stack,!);
+}
+/**
+ * \brief duplica o topo da stack.
+ */
+void copian(Stack stack){
+    struct stack_elemento p = pop(stack);
+    long  a = p.data.val_l;
+    struct stack_elemento t = stack->elemento[stack->comprimento-a];
+    pushdata(stack,t);
+}
+/**
+ * \brief troca de dois elementos da stack.
+ */
+void trocar (Stack stack){
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    pushdata(stack,a);
+    pushdata(stack,b);
+}
