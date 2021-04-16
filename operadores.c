@@ -6,7 +6,10 @@
 #include <stdio.h>
 #include <math.h>
 #include "stack.h"
-#include "operadores.h"     
+#include "operadores.h"
+/** @def maismenos
+ * @brief macro para a função maismais e menosmenos.
+ */
 #define maismenos(stack,op){\
     struct stack_elemento a = pop(stack);\
     switch (a.tipo){\
@@ -37,6 +40,9 @@ void menosmenos(Stack stack){
 double toD (struct stack_elemento a){
     return (a.tipo==STACK_DOUBLE?(a.data.val_d):(a.data.val_l*1.0));
 }
+/** @def contas
+ * @brief macro para a função mais, menos, mult e divisao.
+ */
 #define contas(stack, op){\
     struct stack_elemento a = pop(stack);\
     struct stack_elemento b = pop(stack);\
@@ -84,6 +90,9 @@ void expoente (Stack stack){
     if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long) (pow(toD(b),toD(a))));
     else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));    
 }
+/** @def contasbinarias
+ * @brief macro para a função conjunção, disjuncao e xor.
+ */
 #define contasbinarias(stack, op){\
         struct stack_elemento a = pop(stack);\
     struct stack_elemento b = pop(stack);\
@@ -107,6 +116,9 @@ void disjuncao(Stack stack){
 void xor(Stack stack){
     contasbinarias(stack,^);
 }
+/** @def notg
+ * @brief macro para a função not e notb.
+ */
 #define notg(stack, op){\
     struct stack_elemento b = pop(stack);\
     push(stack,STACK_LONG,(op b.data.val_l));\
@@ -211,6 +223,9 @@ void convC (Stack stack){
             fprintf(stderr,"Erro em convC");exit(EXIT_FAILURE);
     }
 }
+/** @def maiormenorigual
+ * @brief macro para a função igual,menor e maior.
+ */
 #define maiormenorigual(stack, op){\
     struct stack_elemento a = pop(stack);\
     struct stack_elemento b = pop(stack);\
@@ -234,6 +249,9 @@ void maior(Stack stack){
 void menor(Stack stack){
     maiormenorigual(stack,<);
 }
+/** @def maiorbmenorb
+ * @brief macro para a função maiorb e menorb.
+ */
 #define maiorbmenorb(stack, op){\
     struct stack_elemento a = pop(stack);\
     struct stack_elemento b = pop(stack);\
