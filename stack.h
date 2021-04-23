@@ -74,5 +74,8 @@ bool stack_is_empty(Stack stack);
  * @return elemnto que estava no topo da stack
  */
 struct stack_elemento pop(Stack stack);
-void print_stack(Stack stack);/** @param stack a imprimir*/
+/** 
+ * @param stack a imprimir
+ */
+void print_stack(Stack stack);
 #endif 
