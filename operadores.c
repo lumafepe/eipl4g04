@@ -36,3 +36,38 @@ void maismaisS(Stack stack,char c[]){
 /**
  * @brief funçao responsavel de remover o primeiro elemento da string e o colocar na stack
  */
+void menosmenosS(Stack stack,char c[]){
+    char a = c[0];
+    push(stack,STACK_STRING,++c);
+    push(stack,STACK_CHAR,a);
+}
+
+/** @def maismenos
+ * @brief macro para a função maismais e menosmenos.
+ */
+#define maismenos(stack,a,op){\
+    switch (a.tipo){\
+    case STACK_DOUBLE:\
+        push(stack,a.tipo,(a.data.val_d op 1.0));break;\
+    case STACK_LONG:\
+        push(stack,a.tipo,(a.data.val_l op 1));break;\
+    case STACK_CHAR:\
+        push(stack,a.tipo,(a.data.val_c op 1));break;\
+    default:break;\
+    }\
+} 
+/**
+* \brief equivalente a ++ de c ou remover o ultimo elemento de um objecto e coloca-lo na stack.
+*/
+void maismais(Stack stack){//)
+    struct stack_elemento a = pop(stack);
+    if (a.tipo==STACK_STACK) maismaisR(stack,a.data.stk);
+    else if (a.tipo==STACK_STRING) maismaisS(stack,a.data.val_s);
+    else maismenos(stack,a,+);
+}
+/**
+ * \brief equivalente a -- de c ou remover o primeiro elemento de um objecto e coloca-lo na stack.
+*/
+void menosmenos(Stack stack){//(
+    struct stack_elemento a = pop(stack);
+    if (a.tipo==STACK_STACK) menosmenosR(stack,a.data.stk);
