@@ -88,13 +88,6 @@ double toD (struct stack_elemento a){
     }
     return 0.0;
 }
-/** @def contas
- * @brief macro para a função mais, menos, mult e divisao.
- */
-#define contas(stack,a,b, op){\
-    if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l op a.data.val_l);\
-    else push(stack,STACK_DOUBLE,toD(b) op toD(a));\
-}
 
 /**
  * \brief equivalente à soma de dois valores ou a concatenação 
@@ -105,7 +98,8 @@ void mais(Stack stack){
     if (b.tipo==STACK_STACK) concatenarAArrays(stack,b.data.stk,a);
     else if (a.tipo==STACK_STACK) concatenarDeArrays(stack,b,a.data.stk);
     else if (a.tipo==STACK_STRING||b.tipo==STACK_STRING) concatenastrings(stack,a,b);
-    else contas(stack,a,b,+);
+    else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l + a.data.val_l);
+    else push(stack,STACK_DOUBLE,toD(b) + toD(a));
 }
 /**
  * \brief equivalente à subtração de dois valores.
@@ -113,7 +107,8 @@ void mais(Stack stack){
 void menos(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
-    contas(stack,a,b,-);
+    if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l - a.data.val_l);
+    else push(stack,STACK_DOUBLE,toD(b) - toD(a));
 }
 /**
  * \brief faz a multiplicação de uma array por um numero
@@ -150,7 +145,8 @@ void mult(Stack stack){
     else if (b.tipo==STACK_STACK) arraymult(stack,b.data.stk,toD(a));
     else if (a.tipo==STACK_STRING) strmult(stack,a,toD(b));
     else if (b.tipo==STACK_STRING) strmult(stack,b,toD(a));
-    else contas(stack,a,b,*);
+    else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l * a.data.val_l);
+    else push(stack,STACK_DOUBLE,toD(b) * toD(a));
 }
 /**
  * \brief equivalente à divisão de dois valores ou a seperação de uma string por partes
@@ -159,7 +155,8 @@ void divisao(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) dividepor(stack,b.data.val_s,a.data.val_s);
-    else contas(stack,a,b,/);
+    else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l / a.data.val_l);
+    else push(stack,STACK_DOUBLE,toD(b) / toD(a));
 }
 /**
  * \brief equivalente ao resto divisão inteira de dois valores.
@@ -179,37 +176,30 @@ void expoente (Stack stack){
     else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long) (pow(toD(b),toD(a))));
     else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));    
 }
-/** @def contasbinarias
- * @brief macro para a função conjunção, disjuncao e xor.
- */
-#define contasbinarias(stack, op){\
-        struct stack_elemento a = pop(stack);\
-    struct stack_elemento b = pop(stack);\
-    push(stack,STACK_LONG,(b.data.val_l op a.data.val_l));\
-}
+
 /**
  * \brief equivalente à interseção dos bits correspondentes ao número.
 */
 void conjuncao(Stack stack){
-    contasbinarias(stack,&);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    push(stack,STACK_LONG,(b.data.val_l & a.data.val_l));
 }
 /**
  * \brief equivalente à disjunção dos bits correspondentes ao número.
 */
 void disjuncao(Stack stack){
-    contasbinarias(stack,|);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
+    push(stack,STACK_LONG,(b.data.val_l | a.data.val_l));
 }
 /**
  * \brief compara bits correspondentes a um número, atribuindo 1 sempre que são distintos.
 */
 void xor(Stack stack){
-    contasbinarias(stack,^);
-}
-/** @def notg
- * @brief macro para a função not e notb.
- */
-#define notg(stack,a, op){\
-    push(stack,STACK_LONG,(op a.data.val_l));\
+    struct stack_elemento a = pop(stack);\
+    struct stack_elemento b = pop(stack);\
+    push(stack,STACK_LONG,(b.data.val_l ^ a.data.val_l));
 }
 /**
  * \brief inverte os bits de um inteiro ou coloca todos os elemento de uma array na stack
@@ -217,14 +207,14 @@ void xor(Stack stack){
 void not(Stack stack){
     struct stack_elemento a = pop(stack);
     if (a.tipo==STACK_STACK) colocartodos(stack,a.data.stk);
-    else notg(stack,a,~);
+    else push(stack,STACK_LONG,(~ a.data.val_l));
 }
 /**
 * \brief função que vai buscar ao topo da stack um número e se este for diferente de 0 devolve o próprio 0 e, caso contrário, devolve 1.  
 */
 void notb(Stack stack){
     struct stack_elemento a = pop(stack);
-    notg(stack,a,!);
+    push(stack,STACK_LONG,(! a.data.val_l));
 }
 /**
  * \brief duplica o topo da stack.
@@ -314,12 +304,6 @@ void convC (Stack stack){
             fprintf(stderr,"Erro em convC");exit(EXIT_FAILURE);
     }
 }
-/** @def maiormenorigual
- * @brief macro para a função igual,menor e maior.
- */
-#define maiormenorigual(stack,a,b, op){\
-    push(stack,STACK_LONG,toD(b) op toD(a));\
-}
 /**
 * \brief função que vai buscar ao topo da stack dois elementos e verifica se estes são iguais ou delvolve o elemento numa posição x de uma stack/array  
 */
@@ -329,7 +313,7 @@ void igual(Stack stack ){
     if (a.tipo==STACK_STRING) push(stack,STACK_LONG,!strcmp(a.data.val_s,b.data.val_s));
     else if (b.tipo==STACK_STRING) push(stack,STACK_CHAR,b.data.val_s[(int)toD(a)]);
     else if (b.tipo==STACK_STACK) pushdata(stack,b.data.stk->elemento[(int)toD(a)]);
-    else maiormenorigual(stack,a,b,==);
+    else push(stack,STACK_LONG,toD(b) == toD(a));
 }
 /**
  * \brief função que nos dá o maior de dois elementos existentes na stack ou devolve os n primeiros elementos de uma string/stack
@@ -343,7 +327,7 @@ void maior(Stack stack){
         b.data.val_s+=strlen(b.data.val_s)-(int)toD(a);
         push(stack,STACK_STRING,b.data.val_s);
         }
-    else maiormenorigual(stack,a,b,>);
+    else push(stack,STACK_LONG,toD(b) > toD(a));
 }
 /**
  * \brief função que nos dá o menor de dois elementos existentes na stack ou devolve os n ultimos elementos de uma string/stack
@@ -357,13 +341,7 @@ void menor(Stack stack){
         b.data.val_s[(int)toD(a)]='\0';
         push(stack,STACK_STRING,b.data.val_s);
         }
-    else maiormenorigual(stack,a,b,<);
-}
-/** @def maiorbmenorb
- * @brief macro para a função maiorb e menorb.
- */
-#define maiorbmenorb(stack,a,b,op){\
-    pushdata(stack,(toD(b) op toD(a)?b:a));\
+    else push(stack,STACK_LONG,toD(b) < toD(a));
 }
 
 /**
@@ -373,7 +351,7 @@ void maiorb(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) pushdata(stack,(strcmp(b.data.val_s,a.data.val_s)>0)?b:a);
-    else maiorbmenorb(stack,a,b,>);
+    else pushdata(stack,(toD(b) > toD(a)?b:a));
 }
 /**
 * \brief função que nos dá o menor de dois elementos existentes na stack(sem binário).  
@@ -382,7 +360,7 @@ void menorb(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) pushdata(stack,((strcmp(b.data.val_s,a.data.val_s)<0)?b:a));
-    else maiorbmenorb(stack,a,b,<);
+    else pushdata(stack,(toD(b) < toD(a)?b:a));
 }
 /**
 * \brief função que vai buscar 2 elementos ao topo da stack, se ambos forem falsos, retorna 0 , caso contrário, devolve o segundo.

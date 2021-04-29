@@ -67,6 +67,26 @@ Stack create(Stack stack){
     return s;
 }
 /**
+* @brief Dá um elemento pertence a stack com esse determinado tipo.
+*/
+struct stack_elemento setvar(const enum stack_tipo tipo,...){
+    va_list ap;
+    va_start(ap, tipo);
+    struct stack_elemento a;
+    switch(tipo){
+        case STACK_LONG:
+            a.data.val_l  = va_arg(ap, long);break;
+        case STACK_CHAR:
+            a.data.val_c = (char) va_arg(ap, int);break;
+        default:break;
+    }
+    a.tipo=tipo;
+    return a;
+    va_end(ap);
+}
+
+
+/**
  * Cria a stack.
  * É utilizado um array onde, a medida que forem dados inputs , eles vão sendo dispostos no array.
  */
@@ -74,19 +94,17 @@ Stack createP(){
     Stack s = (Stack) malloc(sizeof(StackC));
     s->elemento = (struct stack_elemento *) malloc(0*sizeof(struct stack_elemento *));
     s->comprimento=-1;
-    s->variaveis['A'-65].tipo = STACK_LONG;s->variaveis['A'-65].data.val_l=10;
-    s->variaveis['B'-65].tipo = STACK_LONG;s->variaveis['B'-65].data.val_l=11;
-    s->variaveis['C'-65].tipo = STACK_LONG;s->variaveis['C'-65].data.val_l=12;
-    s->variaveis['D'-65].tipo = STACK_LONG;s->variaveis['D'-65].data.val_l=13;
-    s->variaveis['E'-65].tipo = STACK_LONG;s->variaveis['E'-65].data.val_l=14;
-    s->variaveis['F'-65].tipo = STACK_LONG;s->variaveis['F'-65].data.val_l=15;
-
-    s->variaveis['N'-65].tipo = STACK_CHAR;s->variaveis['N'-65].data.val_c='\n';
-    s->variaveis['S'-65].tipo = STACK_CHAR;s->variaveis['S'-65].data.val_c=' ';
-
-    s->variaveis['X'-65].tipo = STACK_LONG;s->variaveis['X'-65].data.val_l=0;
-    s->variaveis['Y'-65].tipo = STACK_LONG;s->variaveis['Y'-65].data.val_l=1;
-    s->variaveis['Z'-65].tipo = STACK_LONG;s->variaveis['Z'-65].data.val_l=2;
+    s->variaveis['A'-65] = setvar(STACK_LONG,10);
+    s->variaveis['B'-65] = setvar(STACK_LONG,11);
+    s->variaveis['C'-65] = setvar(STACK_LONG,12);
+    s->variaveis['D'-65] = setvar(STACK_LONG,13);
+    s->variaveis['E'-65] = setvar(STACK_LONG,14);
+    s->variaveis['F'-65] = setvar(STACK_LONG,15);
+    s->variaveis['N'-65] = setvar(STACK_CHAR,'\n');
+    s->variaveis['S'-65] = setvar(STACK_CHAR,' ');
+    s->variaveis['X'-65] = setvar(STACK_LONG,0);
+    s->variaveis['Y'-65] = setvar(STACK_LONG,1);
+    s->variaveis['Z'-65] = setvar(STACK_LONG,2);
     return s;
 }
 /**
@@ -175,19 +193,6 @@ struct stack_elemento popL(Stack stack){
     return a;
 }
 
-/**
- * @brief função para fazer debug
- */
-void printtipo(const enum stack_tipo tipo){
-    switch (tipo){
-    case (STACK_DOUBLE):printf("DOUBLE\n");break;
-    case (STACK_LONG):printf("LONG\n");break;
-    case (STACK_STACK):printf("STACK\n");break;
-    case(STACK_STRING): printf("STRING\n");break;
-    case(STACK_CHAR): printf("CHAR\n");break;
-    default:break;
-    }
-}
 /**
  * @brief copia as variaveis de uma stack para outra
  */

@@ -106,12 +106,15 @@ void print_elemento(struct stack_elemento a);
  */
 struct stack_elemento popL(Stack stack);
 /**
- * @param tipo que tipo tem escrever
- */
-void printtipo(const enum stack_tipo tipo);
-/**
  * @param stack stack onde meter as variaveis 
  * @param stk stack de onde copiar as variaveis
  */
 void copyVariaveis(Stack stack,Stack stk);
+/**
+* @param  tipo tipo da variavel a criar  
+* @return elemento com as características pretendidas 
+*/
+struct stack_elemento setvar(const enum stack_tipo tipo,...);
+
+
 #endif 
