@@ -453,3 +453,147 @@ void stack2var(Stack stack,char s){
     pushdata(stk,stack->elemento[stack->comprimento]);
     stack->variaveis[s-65] = stk->elemento[0];
 }
+/**
+ * @brief funçao que dependendo do que esta na stack devolve quantos elementos existem numa array/string ou cria um array com os numeros inteiros de 0 a N
+ */
+void virgula(Stack stack){
+    struct stack_elemento a = pop(stack);
+    switch (a.tipo){
+        case (STACK_STACK):
+            push(stack,STACK_LONG,stacklen(a.data.stk)+1);break;
+        case (STACK_STRING):
+            push(stack,STACK_LONG,strlen(a.data.val_s));break;
+        default:
+            range(stack,a);
+    }
+}
+/**
+ * @brief função que cria um array com os numeros inteiros de 0 a valor de a
+ */
+void range(Stack stack,struct stack_elemento a){
+    Stack stk=create(stack);
+    for (int i = 0;i<toD(a);i++){
+        push(stk,STACK_LONG,i);
+    }
+    push(stack,STACK_STACK,stk);
+}
+/**
+ * @brief coloca todos os elementos de um array noutro ou para a stack
+ */
+void colocartodos(Stack stack,Stack stk){
+    int i=0;
+    while (i<=stk->comprimento){
+        pushdata(stack,stk->elemento[i++]);
+    }
+}
+
+/**
+ * @brief divide uma string por espaços e guarda no array q é colocada na stack
+ */
+void divideporespacos (Stack stack){
+    Stack stk=create(stack);
+    struct stack_elemento a = pop(stack);
+    char *token = strtok(a.data.val_s," \n");
+    while(token != NULL){
+        push(stk,STACK_STRING,token);
+        token = strtok(NULL," \n");
+    }
+    push(stack,STACK_STACK,stk);
+}
+/**
+ * @brief divide uma string por linha e guarda no array q é colocada na stack
+ */
+void dividepornewline (Stack stack){
+    Stack stk=create(stack);
+    struct stack_elemento a = pop(stack);
+    char *token;
+    while ((token = strtok_r(a.data.val_s, "\n", &a.data.val_s))){
+        push(stk,STACK_STRING,token);
+    }
+    push(stack,STACK_STACK,stk);
+}
+/**
+ * @brief divide uma string por um dado elemento e guarda no array q é colocada na stack
+ */
+void dividepor (Stack stack,char c[],char c1[]){
+    Stack stk=create(stack);
+    char *token;
+    while ((token = strtok_r(c, c1, &c))){
+        push(stk,STACK_STRING,token);
+    }
+    push(stack,STACK_STACK,stk);
+}
+/**
+ * @brief verifica se existe uma substring dentro da string se houver coloca a posição na stack caso contrario devolve -1
+ */
+void procurasubstring (Stack stack,char c[],char c1[]){
+    char* res;
+    res=strstr(c,c1);
+    if (res) push(stack,STACK_LONG,res-c);
+    else push(stack,STACK_LONG,-1);
+}
+/**
+ * @brief junta a um elemento todos os elementos de uma array e coloca-os num array dentro da stack
+ */
+void concatenarDeArrays (Stack stack,struct stack_elemento a,Stack stk1){
+    Stack stk;
+    switch (a.tipo){
+        case (STACK_STACK):
+            stk=a.data.stk;break;
+        default :
+            stk=create(stack);
+            pushdata(stk,a);break;
+    }
+    colocartodos(stk,stk1);
+    push(stack,STACK_STACK,stk);
+}
+/**
+ * @brief junta aos elementos de uma array um elemnto e guarda a array  dentro da stack
+ */
+void concatenarAArrays (Stack stack,Stack stk1,struct stack_elemento a){
+    switch (a.tipo){
+        case (STACK_STACK):
+            colocartodos(stk1,a.data.stk);break;
+        default :
+            pushdata(stk1,a);break;
+    }
+    push(stack,STACK_STACK,stk1);
+}
+/**
+ * @brief remove um dado numero de elementos do fim da array e coloca-os na stack
+ */
+void retiraXDoFim(Stack stack,Stack stk,double n){
+    int i;
+    if (n>stk->comprimento+1) n =0;
+    else n = (int)(stk->comprimento+1-n);
+    for (i=(int)n;i<stk->comprimento+1;i++) pushdata(stack,stk->elemento[i]);
+}
+/**
+ * @brief remove um dado numero de elementos do inicio da array e coloca-os na stack
+ */
+void retiraXDoInicio(Stack stack,Stack stk,double n){
+    if (n>stk->comprimento+1) n = stk->comprimento+1;
+    for (int i =0;i<n ;i++) pushdata(stack,popL(stk));
+}
+/**
+ * @brief copia um elemento para uma nova variavel e devolve a copia do elemento
+ */
+struct stack_elemento copiaElem(struct stack_elemento a){
+    struct stack_elemento b;
+    switch (a.tipo) {
+        case STACK_LONG:
+            b.data.val_l=a.data.val_l;break;
+        case STACK_STRING:
+            b.data.val_s=a.data.val_s;break;
+        case STACK_DOUBLE:
+            b.data.val_d=a.data.val_d;break;
+        case STACK_STACK:
+            b.data.stk=a.data.stk;break;
+        case STACK_CHAR:
+            b.data.val_c=a.data.val_c;break;
+        default:break;
+    }
+    b.tipo=a.tipo;
+    return b;
+
+}
