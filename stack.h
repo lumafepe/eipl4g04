@@ -59,10 +59,14 @@ void push(Stack stack,const enum stack_tipo tipo,...);
  */
 void pushdata (Stack stack,struct stack_elemento a);
 /**
+ * @param stack stack onde meter as variaveis 
+ * @param stk stack de onde copiar as variaveis
+ */
+void copyVariaveis(Stack stack,Stack stk); 
+/**
  * @param stack de onde copiar as variaveis.
  * @return stack inteira.
  */
-
 Stack create(Stack stack);
 /**
  * @return stack inteira.
@@ -106,15 +110,9 @@ void print_elemento(struct stack_elemento a);
  */
 struct stack_elemento popL(Stack stack);
 /**
- * @param stack stack onde meter as variaveis 
- * @param stk stack de onde copiar as variaveis
+ * @param  tipo tipo da variavel a criar  
+ * @return elemento com as características pretendidas 
  */
-void copyVariaveis(Stack stack,Stack stk);
-/**
-* @param  tipo tipo da variavel a criar  
-* @return elemento com as características pretendidas 
-*/
 struct stack_elemento setvar(const enum stack_tipo tipo,...);
-
-
+// fim do codigo
 #endif 
