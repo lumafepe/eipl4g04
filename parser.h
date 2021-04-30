@@ -17,31 +17,31 @@ void leituraCasos(Stack stack,char c[]);
  * @param c caractere a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesBinarias(Stack stack,char c);
+void leituraOperacoesBinarias(Stack stack,char c,int *Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param c caractere a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesContas(Stack stack,char c);
+void leituraOperacoesContas(Stack stack,char c,int *Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param c caracteres a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesStack(Stack stack,char c[]);
+void leituraOperacoesStack(Stack stack,char c[],int *Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param c caractere a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesConversoes(Stack stack,char c);
+void leituraOperacoesConversoes(Stack stack,char c,int*Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param c caracteres a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesCondicionais(Stack stack,char c[]);
+void leituraOperacoesCondicionais(Stack stack,char c[],int*Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param c caracteres a processar
@@ -52,7 +52,7 @@ void leitura3(Stack stack,char c[]);
  * @param c caracteres a processar
  * @return sé algum caso dentro da fubção aconteceu
  */
-int leituraOperacoesArrays(Stack stack,char c[]);
+void leituraOperacoesArrays(Stack stack,char c[],int *Bool);
 /**
  * @param stack é a stack onde os valores estão guardados
  * @param rest entrada a processar
@@ -62,5 +62,6 @@ char * leitura2(Stack stack,char *rest);
 /**
  * @param stack é a stack onde os valores estão guardados
 */
+
 void leitura (Stack stack);
 #endif
