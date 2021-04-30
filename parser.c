@@ -238,40 +238,49 @@ void leitura (Stack stack){
     leitura2(stack,str);
 }
 
+
+/**
+ * @brief auxiliar a leitura2 responsavel por guardar as array
+ */
+char * lerArrayAux(Stack stack,char *rest){
+    Stack stk;
+    char *l;
+    rest++;
+    stk = create(stack);
+    l= strdup(rest);
+    rest=leitura2(stk,l);
+    copyVariaveis(stack,stk);
+    push(stack,STACK_STACK,stk);
+    return rest;
+}
+
 /**
  * Esta é a função que trata de separa o texto por partes e dependodo do que for o que fazer com ele
 */
 char * leitura2(Stack stack, char *rest){
-    Stack stk;
     int Bool=1;
-    char * token,*l;
+    char * token;
     while (Bool){
         switch (rest[0]){
             case ('['):
-                rest++;
-                stk = create(stack);
-                l= strdup(rest);
-                rest=leitura2(stk,l);
-                copyVariaveis(stack,stk);
-                push(stack,STACK_STACK,stk);
-                break;
+                rest=lerArrayAux(stack,rest);break;
             case (']'):
                 Bool=0;
                 rest++;break;;
-        case '\"':
-            rest++;
-            if ((token=strtok_r(rest, "\"",&rest))) push(stack,STACK_STRING,token);
-            else Bool=0;
-            break;
-        case ' ':
-            rest++;break;
-        case '\n':
-            Bool=0;break;
-        default:
-            if ((token = strtok_r(rest, " ", &rest))) leitura3(stack,token);
-            else Bool=0;
+            case '\"':
+                rest++;
+                if ((token=strtok_r(rest, "\"",&rest))) push(stack,STACK_STRING,token);
+                else Bool=0;
                 break;
-        }
+            case ' ':
+                rest++;break;
+            case '\n':
+                Bool=0;break;
+            default:
+                if ((token = strtok_r(rest, " ", &rest))) leitura3(stack,token);
+                else Bool=0;
+                    break;
+            }
     }
     return rest;
 }

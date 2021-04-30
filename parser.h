@@ -62,6 +62,11 @@ char * leitura2(Stack stack,char *rest);
 /**
  * @param stack é a stack onde os valores estão guardados
 */
-
 void leitura (Stack stack);
+/**
+ * @param stack stack onde os valores vao ser guardados
+ * @param rest string a ser processada
+ * @return resto da string a ser processada
+ */
+char * lerArrayAux(Stack stack,char *rest);
 #endif
