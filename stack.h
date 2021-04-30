@@ -47,72 +47,32 @@ typedef struct stack * Stack;
  * @brief Define o tamanho em bites de uma stack.
  */
 typedef struct stack  StackC;
-/**
- * @param stack é a stack onde os valores estao guardados
- * @param tipo tipo do valor a guardar
- * @param ... argumentos a serem inseridos na stack
- */
+
 void push(Stack stack,const enum stack_tipo tipo,...);
-/**
- * @param stack é a stack onde os valores estao guardados
- * @param a elemnto a dar push para a stack
- */
+
 void pushdata (Stack stack,struct stack_elemento a);
-/**
- * @param stack stack onde meter as variaveis 
- * @param stk stack de onde copiar as variaveis
- */
+
 void copyVariaveis(Stack stack,Stack stk); 
-/**
- * @param stack de onde copiar as variaveis.
- * @return stack inteira.
- */
+
 Stack create(Stack stack);
-/**
- * @return stack inteira.
- */
+
 Stack createP();
-/**
- * @param stack stack a destroir
- */
+
 void destroy(Stack stack);
-/**
- * @param stack onde ver tipo do topo 
- * @return tipo do elemento no topo da stack.
- */
+
 enum stack_tipo peek(Stack stack);
-/**
- * @param stack a verificar se esta vazia
- * @return 1 se stack esta vazia e 0 caso contrário.
- */
+
 bool stack_is_empty(Stack stack);
-/** 
- * @param stack onde remover o topo
- * @return elemnto que estava no topo da stack
- */
+
 struct stack_elemento pop(Stack stack);
-/** 
- * @param stack a imprimir
- */
+
 void print_stack(Stack stack);
-/** 
- * @param stack onde verificar o comprimento
- * @return comprimento da stack 
- */
+
 int stacklen(Stack stack);
-/**
- * @param a elemento a mostrar no ecra
- */
+
 void print_elemento(struct stack_elemento a);
-/**
- * @param stack onde remover primeiro elemento
- * @return primeiro elemento da stack
- */
+
 struct stack_elemento popL(Stack stack);
-/**
- * @param tipo tipo da variavel a criar  
- * @return elemento com as características pretendidas 
- */
+
 struct stack_elemento setvar(const enum stack_tipo tipo,...);
-// fim do codigo
 #endif 
