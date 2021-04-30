@@ -110,7 +110,7 @@ void print_elemento(struct stack_elemento a);
  */
 struct stack_elemento popL(Stack stack);
 /**
- * @param  tipo tipo da variavel a criar  
+ * @param tipo tipo da variavel a criar  
  * @return elemento com as características pretendidas 
  */
 struct stack_elemento setvar(const enum stack_tipo tipo,...);
