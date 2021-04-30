@@ -235,5 +235,16 @@ void arraymult(Stack stack,Stack stk,double a);
  * @param n numero de repetiçoes da string
  */
 void strmult(Stack stack,struct stack_elemento a,double n);
-
+/**
+ * @param stack stack onde estao os valores e onde guardar
+ * @param a primeiro elemento a ordenar 
+ * @param b segundo elemento a ordenar 
+ */
+void concatarray(Stack stack,struct stack_elemento a,struct stack_elemento b);
+/**
+ * @param stack stack onde estao os valores e onde guardar
+ * @param a primeiro elemento a multiplicar
+ * @param b segundo elemento a multiplicar
+ */
+void arraymulCasos(Stack stack,struct stack_elemento a,struct stack_elemento b);
 #endif

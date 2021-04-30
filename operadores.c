@@ -95,11 +95,19 @@ double toD (struct stack_elemento a){
 void mais(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
-    if (b.tipo==STACK_STACK) concatenarAArrays(stack,b.data.stk,a);
-    else if (a.tipo==STACK_STACK) concatenarDeArrays(stack,b,a.data.stk);
-    else if (a.tipo==STACK_STRING||b.tipo==STACK_STRING) concatenastrings(stack,a,b);
+    concatarray(stack,a,b);
+    if (a.tipo==STACK_STRING||b.tipo==STACK_STRING) concatenastrings(stack,a,b);
     else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l + a.data.val_l);
     else push(stack,STACK_DOUBLE,toD(b) + toD(a));
+}
+
+
+/**
+ * @brief auxiliar para dividir o caso concatenar a uma array o ou concatenar algo a uma array
+ */
+void concatarray(Stack stack,struct stack_elemento a,struct stack_elemento b){
+    if (b.tipo==STACK_STACK) concatenarAArrays(stack,b.data.stk,a);
+    else if (a.tipo==STACK_STACK) concatenarDeArrays(stack,b,a.data.stk);
 }
 /**
  * \brief equivalente à subtração de dois valores.
@@ -141,13 +149,22 @@ void strmult(Stack stack,struct stack_elemento a,double n){
 void mult(Stack stack){
     struct stack_elemento a = pop(stack);
     struct stack_elemento b = pop(stack);
+    arraymulCasos(stack,a,b);
+    if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l * a.data.val_l);
+    else push(stack,STACK_DOUBLE,toD(b) * toD(a));
+}
+
+/**
+ * @brief auxiliar para dividir o caso multiiplicar uma string/array
+ */
+void arraymulCasos(Stack stack,struct stack_elemento a,struct stack_elemento b){
     if (a.tipo==STACK_STACK) arraymult(stack,a.data.stk,toD(b));
     else if (b.tipo==STACK_STACK) arraymult(stack,b.data.stk,toD(a));
     else if (a.tipo==STACK_STRING) strmult(stack,a,toD(b));
     else if (b.tipo==STACK_STRING) strmult(stack,b,toD(a));
-    else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l * a.data.val_l);
-    else push(stack,STACK_DOUBLE,toD(b) * toD(a));
 }
+
+
 /**
  * \brief equivalente à divisão de dois valores ou a seperação de uma string por partes
 */
