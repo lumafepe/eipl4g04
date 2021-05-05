@@ -177,4 +177,179 @@ void concatenarAArrays (Stack stack,Stack stk1,struct stack_elemento a);
  */
 void dividepornewline (Stack stack);
 /**
+ * @param stack é a stack onde os valores estao guardados
+ */
+void divideporespacos (Stack stack);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param c é a string a ser dividida
+ * @param c1 string a dividir por
+ */
+void dividepor (Stack stack,char c[],char c1[]);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param c é a string onde procurar substring
+ * @param c1 string a pesquisar por
+ */
+void procurasubstring (Stack stack,char c[],char c1[]);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param a é o elemento onde esta a primeira string a concatenar
+ * @param b é o elemento onde esta a segunda string a concatenar
+ */
+void concatenastrings (Stack stack,struct stack_elemento a,struct stack_elemento b);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param stk array de onde remover o elemento
+ */
+void maismaisR(Stack stack,Stack stk);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param stk array de onde remover elementos
+ * @param n numero de elementos a remover
+ */
+void retiraXDoFim(Stack stack,Stack stk,double n);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param stk array de onde remover elementos
+ * @param n numero de elementos a remover
+ */
+void retiraXDoInicio(Stack stack,Stack stk,double n);
+/**
+ * @param a elemento a tornar em char
+ * @return string correspondente ao elemento
+ */
+char * toS(struct stack_elemento a);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param c string de onde remover o elemento
+ */
+void maismaisS(Stack stack,char c[]);
+/**
+ * @param stack é a stack onde os valores estao guardados
+ * @param c string de onde remover o elemento
+ */
+void menosmenosS(Stack stack,char c[]);
+/**
+ * @param a elemento a criar copia
+ * @return copia do elemento original 
+ */
+struct stack_elemento copiaElem(struct stack_elemento a);
+/**
+ * @param stack onde os valores estao guardados.
+ */
+void convS(Stack stack);
+/**
+ * @param stack stack onde estao os valores e onde guardar
+ * @param a primeiro elemento a ordenar 
+ * @param b segundo elemento a ordenar 
+ * @return 1 se algum caso ocorreu
+ */
+int concatarray(Stack stack,struct stack_elemento a,struct stack_elemento b);
+/**
+ * @param stack stack onde estao os valores e onde guardar
+ * @param a primeiro elemento a multiplicar
+ * @param b segundo elemento a multiplicar
+ */
+int arraymulCasos(Stack stack,struct stack_elemento a,struct stack_elemento b);
 
+/**
+ * @param stack stack onde estao os valores e onde guardar.
+ * @param c array que vamos receber como input.
+ */
+void aplicaBloco(Stack stack,char c[]);
+/**
+ * @param stack stack onde estao os valores e onde guardar.
+ * @param a elemento da stack.
+ * @param c array que vamos receber como input.
+ */
+void map(Stack stack,struct stack_elemento a,char c[]);
+/**
+ * @param stack stack onde estao os valores e onde guardar.
+ * @param stk stack que contem os valores sujeitos a alteração.
+ * @param c array que vamos receber como input.
+ */
+void mapA(Stack stack,Stack stk,char c[]);
+/**
+ * @param stack stack onde estao os valores e onde guardar.
+ * @param in 
+ * @param c array que vamos receber como input.
+ */
+void mapS(Stack stack,char in[],char c[]);
+/**
+ * @param stack stack onde os valores estao guardados
+ * @param a array/string a aplicar o bloco
+ * @param c bloco a aplicar
+ */
+void filter(Stack stack, struct stack_elemento a,char c[]);
+/**
+ * @param stack stack onde os valores estao guardados
+ * @param stk array a aplicar o bloco
+ * @param c bloco a aplicar
+ */
+void filterA(Stack stack,Stack stk,char c[]);
+/**
+ * @param stack stack onde os valores estao guardados
+ * @param int string a aplicar o bloco
+ * @param c bloco a aplicar
+ */
+void filterS(Stack stack,char in[],char c[]);
+/**
+ * @param stack stack onde os valores estao guardados
+ * @param stk array a aplicar o bloco
+ * @param c bloco a aplicar
+ */
+void fold(Stack stack,Stack stk, char c[]);
+/**
+ * @param i string a remover 1º elemento
+ * @return primeiro caracter sob a forma de elemento
+ */
+struct stack_elemento popLS(char i[]);
+/**
+ * @typedef par
+ * @brief define um elemento e o valor de lhe aplicar um bloco
+ */
+typedef struct pardevalores{
+    struct stack_elemento elemento;/**< representa o elemento original */
+    struct stack_elemento valor;/**< representa o valor pos aplicar o bloco */
+}par;
+/**
+ * @param stack onde os valores estam guardados
+ * @param stk array a ordenar
+ * @param c bloco a usar para ordenar
+ */
+void ordenar(Stack stack,Stack stk,char c[]);
+/**
+ * @param stk stack onde os valores originais estao
+ * @param stk1 stack onde colocar os elementos e aplicar o bloco
+ * @param c bloco a aplicar
+ * @param comp numero de elementos na stack
+ * @param pares lista onde guardar os pares
+ */
+void guardaempares(Stack stk,Stack stk1,char c[],int comp,par *pares);
+/**
+ * @param pares lista onde guardar os pares
+ * @param N numero de pares na lista
+ * @param c bloco a aplicar 
+ */
+void ordenaPares(par *pares,int N,char c[]);
+/**
+ * @param stack stack onde guardar os elementos
+ * @param pares lista com os pares
+ * @param N numero de pares existente na lista
+ */
+void pushPares(Stack stack,par *pares,int N);
+/**
+ * @param stack stack onde o bloco e a array estão guardados
+ */
+void w(Stack stack);
+/**
+ * @param i numero a verificar os digitos
+ * @return numero de digitos
+ */
+int contadigitos(int i);
+/**
+ * @param stack stack a imprimir o topo
+ */
+void print_topo(Stack stack);
+#endif
