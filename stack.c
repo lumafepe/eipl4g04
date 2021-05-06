@@ -81,7 +81,7 @@ Stack create(Stack stack){
     return s;
 }
 /**
- * @brief devolve um elemento com um tipo e informação
+ * @brief devolve um elemento com um tipo e informação.
  * @param tipo tipo do elemento
  * @param ... valor a guardar no elemento
  * @return elemento com o valor e tipo dado 
@@ -178,7 +178,7 @@ void print_stack(Stack stack){
     }
 }
 /**
- * @brief mostra um elemento da stack 
+ * @brief mostra um elemento da stack.
  * @param a elemento a mostrar no ecra
  */
 void print_elemento(struct stack_elemento a){
@@ -228,7 +228,7 @@ struct stack_elemento popL(Stack stack){
 }
 
 /**
- * @brief função para fazer debug
+ * @brief função para fazer debug.
  * @param tipo que tipo tem escrever
  */
 void printtipo(const enum stack_tipo tipo){
