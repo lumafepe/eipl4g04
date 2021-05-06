@@ -9,11 +9,15 @@
 #include "stack.h"
 #include "operadores.h"
 
+
+
+
+
+
 /**
  * \brief aumenta o tamanho da stack e adiciona o elemento ao inicio da array.
 */
 void push(Stack stack,const enum stack_tipo tipo,...){
-    Stack stk;
     stack->elemento=realloc(stack->elemento,sizeof(*stack->elemento)*((++stack->comprimento)+1));
     va_list ap;
     va_start(ap, tipo);
@@ -29,9 +33,8 @@ void push(Stack stack,const enum stack_tipo tipo,...){
         case STACK_BLOCO:
             stack->elemento[stack->comprimento].data.val_s = strdup(va_arg(ap, char *));break;
         case STACK_STACK:
-            stk = va_arg(ap, Stack);
             stack->elemento[stack->comprimento].data.stk = create(stack);
-            colocartodos(stack->elemento[stack->comprimento].data.stk,stk);break;
+            colocartodos(stack->elemento[stack->comprimento].data.stk,va_arg(ap, Stack));break;
         default:
             fprintf(stderr,"erro");exit(EXIT_FAILURE);
     }
