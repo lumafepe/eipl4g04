@@ -16,6 +16,9 @@
 
 /**
  * \brief aumenta o tamanho da stack e adiciona o elemento ao inicio da array.
+ * @param stack é a stack onde os valores estao guardados
+ * @param tipo tipo do valor a guardar
+ * @param ... argumentos a serem inseridos na stack
 */
 void push(Stack stack,const enum stack_tipo tipo,...){
     stack->elemento=realloc(stack->elemento,sizeof(*stack->elemento)*((++stack->comprimento)+1));
@@ -43,6 +46,8 @@ void push(Stack stack,const enum stack_tipo tipo,...){
 }
 /**
  * \brief dá push de um elemento completo.
+ * @param stack é a stack onde os valores estao guardados
+ * @param a elemnto a dar push para a stack
 */
 void pushdata (Stack stack,struct stack_elemento a){ 
     switch(a.tipo){
@@ -65,6 +70,8 @@ void pushdata (Stack stack,struct stack_elemento a){
 /**
  * Cria uma stack.
  * É utilizado um array onde, a medida que forem dados inputs , eles vão sendo dispostos no array.
+ * @param stack de onde copiar as variaveis.
+ * @return stack inteira.
  */
 Stack create(Stack stack){
     Stack s = (Stack) malloc(sizeof(StackC));
@@ -75,6 +82,9 @@ Stack create(Stack stack){
 }
 /**
  * @brief devolve um elemento com um tipo e informação
+ * @param tipo tipo do elemento
+ * @param ... valor a guardar no elemento
+ * @return elemento com o valor e tipo dado 
  */
 struct stack_elemento setvar(const enum stack_tipo tipo,...){
     va_list ap;
@@ -94,6 +104,7 @@ struct stack_elemento setvar(const enum stack_tipo tipo,...){
 /**
  * Cria a stack.
  * É utilizado um array onde, a medida que forem dados inputs , eles vão sendo dispostos no array.
+ * @return stack inteira.
  */
 Stack createP(){
     Stack s = (Stack) malloc(sizeof(StackC));
@@ -117,6 +128,7 @@ Stack createP(){
 }
 /**
  * @brief Liberta posições de memória na stack.
+ * @param stack stack a destroir
  */
 void destroy(Stack stack){
     free(stack->elemento);
@@ -124,12 +136,16 @@ void destroy(Stack stack){
 }
 /**
  * @brief Verifica qual o tipo do elemento no topo da stack.
+ * @param stack onde ver tipo do topo 
+ * @return tipo do elemento no topo da stack.
  */
 enum stack_tipo peek(Stack stack){
     return(stack->elemento[stack->comprimento].tipo);
 }
 /**
  * @brief Dá-nos verdadeiro caso a stack esteja vazia, caso contrário dá falso.
+ * @param stack a verificar se esta vazia
+ * @return 1 se stack esta vazia e 0 caso contrário.
  */
 bool stack_is_empty(Stack stack){
     return (stack->comprimento==-1);
@@ -138,6 +154,8 @@ bool stack_is_empty(Stack stack){
  * Função que retira do topo da stack o elemento pretendido.
  * Nesta função temos em atenção o tipo do elemento que queremos retirar,comparando-o com os tipos de elementos existentes na stack.
  * Caso não exista nenhum elemento na stack para se dar pop, ele imprime uma mensagem a dizer que a stack está vazia.
+ * @param stack onde remover o topo
+ * @return elemnto que estava no topo da stack
  */
 struct stack_elemento pop(Stack stack){
     if (!stack_is_empty(stack)){
@@ -152,6 +170,7 @@ struct stack_elemento pop(Stack stack){
 }
 /**
  * @brief Função responsável por imprimir os elementos da stack.
+ * @param stack a imprimir
  */
 void print_stack(Stack stack){
     for (int i =0;i<=stack->comprimento;i++){
@@ -160,6 +179,7 @@ void print_stack(Stack stack){
 }
 /**
  * @brief mostra um elemento da stack 
+ * @param a elemento a mostrar no ecra
  */
 void print_elemento(struct stack_elemento a){
         switch(a.tipo){
@@ -181,6 +201,8 @@ void print_elemento(struct stack_elemento a){
     }
 /**
  * @brief devolve o comprimento de uma stack
+ * @param stack onde verificar o comprimento
+ * @return comprimento da stack 
  */
 int stacklen(Stack stack){
     return stack->comprimento;
@@ -189,6 +211,8 @@ int stacklen(Stack stack){
  * Função que retira do fundo da stack o elemento pretendido.
  * Nesta função temos em atenção o tipo do elemento que queremos retirar,comparando-o com os tipos de elementos existentes na stack.
  * Caso não exista nenhum elemento na stack para se dar pop, ele imprime uma mensagem a dizer que a stack está vazia.
+ * @param stack onde remover primeiro elemento
+ * @return primeiro elemento da stack
  */
 struct stack_elemento popL(Stack stack){
     struct stack_elemento a;
@@ -205,6 +229,7 @@ struct stack_elemento popL(Stack stack){
 
 /**
  * @brief função para fazer debug
+ * @param tipo que tipo tem escrever
  */
 void printtipo(const enum stack_tipo tipo){
     switch (tipo){
@@ -218,6 +243,8 @@ void printtipo(const enum stack_tipo tipo){
 }
 /**
  * @brief copia variaveis de uma array/ stack para outra.
+ * @param stack stack para onde copiar as variaveis
+ * @param stk stack de onde copiar as variaveis
  */
 void copyVariaveis(Stack stack,Stack stk){
     for (int i=0;i<26;i++){
