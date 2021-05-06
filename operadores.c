@@ -824,28 +824,19 @@ void ordenaPares(par *pares,int N,char c[]){
     while (Bool){
         Bool=0;
         for (i=0;i<N;i++)
-            if (strlen(c)==1 && pares[i].valor.tipo==STACK_STRING){
+            if ((strlen(c)==1 || toD(pares[i].valor)==toD(pares[i+1].valor)) && pares[i].valor.tipo==STACK_STRING){
                 if (strcmp(pares[i].elemento.data.val_s,pares[i+1].elemento.data.val_s)>0){
                     auxiliar=pares[i];
                     pares[i]=pares[i+1];
                     pares[i+1]=auxiliar;
                     Bool=1;
                 }
-
             }
             else if (toD(pares[i].valor)>toD(pares[i+1].valor)){
                 auxiliar=pares[i];
                 pares[i]=pares[i+1];
                 pares[i+1]=auxiliar;
                 Bool=1;
-            }
-            else if (toD(pares[i].valor)==toD(pares[i+1].valor) && pares[i].valor.tipo==STACK_STRING){
-                if (strcmp(pares[i].elemento.data.val_s,pares[i+1].elemento.data.val_s)>0){
-                    auxiliar=pares[i];
-                    pares[i]=pares[i+1];
-                    pares[i+1]=auxiliar;
-                    Bool=1;
-                }
             }
     }
 }
