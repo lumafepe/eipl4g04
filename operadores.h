@@ -306,7 +306,7 @@ void fold(Stack stack,Stack stk, char c[]);
  */
 struct stack_elemento popLS(char i[]);
 /**
- * @typedef par
+ * tipo de um par
  * @brief define um elemento e o valor de lhe aplicar um bloco
  */
 typedef struct pardevalores{
