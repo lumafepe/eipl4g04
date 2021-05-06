@@ -11,17 +11,14 @@ enum stack_tipo{
     STACK_DOUBLE, /**< representa o tipo de uma double */
     STACK_STRING, /**< representa o tipo de uma string */
     STACK_STACK, /**< representa o tipo de uma array */
-    STACK_BLOCO, /**< representa o tipo de um bloco */
-    STACK_VAZIO /**< um tipo especial para nao dar push de um dado elemento */
+    STACK_BLOCO /**< representa o tipo de um bloco */
 };
 /**
- * stack_elemento estrutura de um elemento
+ * @struct stack_elemento estrutura de um elemento
  * @brief Tipo e valor de cada elemento da stack.
- * @var tipo: Tipo de cada elemento da stack.
- * @var data: Membro que contem os valores guardados na stack
  */
 struct stack_elemento{
-    enum stack_tipo tipo;
+    enum stack_tipo tipo;/**tipo do elemento dentro da union*/
     union {
         char val_c;/**< onde char's ficam guardadas */
         long val_l;/**< onde long's ficam guardadas */
