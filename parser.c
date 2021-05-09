@@ -294,10 +294,6 @@ char * lerBlocoAux(Stack stack,char *rest){
 
 
 
-
-
-
-
 /**
  * Esta é a função que trata de separa o texto por partes e dependodo do que for o que fazer com ele
 */
@@ -317,7 +313,8 @@ char * leitura2(Stack stack, char *rest){
                 rest++;break;;
             case '\"':
                 rest++;
-                if ((token=strtok_r(rest, "\"",&rest))) push(stack,STACK_STRING,token);
+                if(*rest=='\"') {push(stack,STACK_STRING,""); rest++;}
+                else if ((token=strtok_r(rest, "\"",&rest))) push(stack,STACK_STRING,token);
                 else Bool=0;
                 break;
             case ' ':

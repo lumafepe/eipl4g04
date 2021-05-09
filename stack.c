@@ -20,7 +20,7 @@
  * @param tipo tipo do valor a guardar
  * @param ... argumentos a serem inseridos na stack
 */
-void push(Stack stack,const enum stack_tipo tipo,...){
+void push(Stack stack,Enumeracao tipo,...){
     stack->elemento=realloc(stack->elemento,sizeof(*stack->elemento)*((++stack->comprimento)+1));
     va_list ap;
     va_start(ap, tipo);
@@ -49,7 +49,7 @@ void push(Stack stack,const enum stack_tipo tipo,...){
  * @param stack é a stack onde os valores estao guardados
  * @param a elemnto a dar push para a stack
 */
-void pushdata (Stack stack,struct stack_elemento a){ 
+void pushdata (Stack stack,elemento a){ 
     switch(a.tipo){
         case STACK_CHAR:
             push(stack,a.tipo,a.data.val_c);break;
@@ -75,7 +75,7 @@ void pushdata (Stack stack,struct stack_elemento a){
  */
 Stack create(Stack stack){
     Stack s = (Stack) malloc(sizeof(StackC));
-    s->elemento = (struct stack_elemento *) malloc(0*sizeof(struct stack_elemento *));
+    s->elemento = (elemento *) malloc(0*sizeof(elemento *));
     s->comprimento=-1;
     copyVariaveis(s,stack);
     return s;
@@ -86,10 +86,10 @@ Stack create(Stack stack){
  * @param ... valor a guardar no elemento
  * @return elemento com o valor e tipo dado 
  */
-struct stack_elemento setvar(const enum stack_tipo tipo,...){
+elemento setvar(Enumeracao tipo,...){
     va_list ap;
     va_start(ap, tipo);
-    struct stack_elemento a;
+    elemento a;
     switch(tipo){
         case STACK_LONG:
             a.data.val_l  = va_arg(ap, long);break;
@@ -108,7 +108,7 @@ struct stack_elemento setvar(const enum stack_tipo tipo,...){
  */
 Stack createP(){
     Stack s = (Stack) malloc(sizeof(StackC));
-    s->elemento = (struct stack_elemento *) malloc(0*sizeof(struct stack_elemento *));
+    s->elemento = (elemento *) malloc(0*sizeof(elemento *));
     s->comprimento=-1;
     s->variaveis['A'-65] = setvar(STACK_LONG,10);
     s->variaveis['B'-65] = setvar(STACK_LONG,11);
@@ -132,6 +132,7 @@ Stack createP(){
  */
 void destroy(Stack stack){
     free(stack->elemento);
+    free(stack->variaveis);
     free(stack);
 }
 /**
@@ -139,7 +140,7 @@ void destroy(Stack stack){
  * @param stack onde ver tipo do topo 
  * @return tipo do elemento no topo da stack.
  */
-enum stack_tipo peek(Stack stack){
+Enumeracao peek(Stack stack){
     return(stack->elemento[stack->comprimento].tipo);
 }
 /**
@@ -157,9 +158,9 @@ bool stack_is_empty(Stack stack){
  * @param stack onde remover o topo
  * @return elemnto que estava no topo da stack
  */
-struct stack_elemento pop(Stack stack){
+elemento pop(Stack stack){
     if (!stack_is_empty(stack)){
-        struct stack_elemento a = stack->elemento[stack->comprimento];
+        elemento a = stack->elemento[stack->comprimento];
         stack->elemento=realloc(stack->elemento,sizeof(*stack->elemento)*(stack->comprimento));
         stack->comprimento--;
         return a;
@@ -181,7 +182,7 @@ void print_stack(Stack stack){
  * @brief mostra um elemento da stack.
  * @param a elemento a mostrar no ecra
  */
-void print_elemento(struct stack_elemento a){
+void print_elemento(elemento a){
         switch(a.tipo){
             case STACK_CHAR:
                 printf("%c",a.data.val_c);break;
@@ -214,8 +215,8 @@ int stacklen(Stack stack){
  * @param stack onde remover primeiro elemento
  * @return primeiro elemento da stack
  */
-struct stack_elemento popL(Stack stack){
-    struct stack_elemento a;
+elemento popL(Stack stack){
+    elemento a;
     if (!stack_is_empty(stack)){
         a = stack->elemento[0];
         stack->elemento++;
@@ -231,7 +232,7 @@ struct stack_elemento popL(Stack stack){
  * @brief função para fazer debug.
  * @param tipo que tipo tem escrever
  */
-void printtipo(const enum stack_tipo tipo){
+void printtipo(Enumeracao tipo){
     switch (tipo){
     case (STACK_DOUBLE):printf("DOUBLE\n");break;
     case (STACK_LONG):printf("LONG\n");break;

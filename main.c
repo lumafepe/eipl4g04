@@ -23,6 +23,5 @@ int main() {
     leitura(stack);
     print_stack(stack);
     printf("\n");
-    destroy(stack);
     return 0;
 }
