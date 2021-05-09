@@ -37,12 +37,12 @@ struct stack{
     struct stack_elemento variaveis[26];/**< lugar onde os valores das variaveis vão ser guardados */
 };
 /**
- * @typedef Stack tipo de uma stack
+ * Stack tipo de uma stack
  * @brief Define o tipo da stack.
  */
 typedef struct stack * Stack;
 /**
- * @typedef  StackC tipo para o comprimento de uma stack
+ * StackC tipo para o comprimento de uma stack
  * @brief Define o tamanho em bytes da stack da stack.
  */
 typedef struct stack  StackC;
