@@ -13,7 +13,7 @@
  * @brief funçao responsavel de remover o elemento no topo da array e o colocar na stack
  */
 void maismaisR(Stack stack,Stack stk){
-    elemento a = pop(stk);
+    struct stack_elemento a = pop(stk);
     push(stack,STACK_STACK,stk);
     pushdata(stack,a);
 }
@@ -21,7 +21,7 @@ void maismaisR(Stack stack,Stack stk){
  * @brief funçao responsavel de remover o elemento no inicio da array e o colocar na stack
  */
 void menosmenosR(Stack stack,Stack stk){
-    elemento a = popL(stk);
+    struct stack_elemento a = popL(stk);
     push(stack,STACK_STACK,stk);
     pushdata(stack,a);
 }
@@ -61,7 +61,7 @@ void menosmenosS(Stack stack,char c[]){
 * \brief equivalente a ++ de c.
 */
 void maismais(Stack stack){//)
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     if (a.tipo==STACK_STACK) maismaisR(stack,a.data.stk);
     else if (a.tipo==STACK_STRING) maismaisS(stack,a.data.val_s);
     else maismenos(stack,a,+);
@@ -70,7 +70,7 @@ void maismais(Stack stack){//)
  * \brief equivalente a -- de c.
 */
 void menosmenos(Stack stack){//(
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     if (a.tipo==STACK_STACK) menosmenosR(stack,a.data.stk);
     else if (a.tipo==STACK_STRING) menosmenosS(stack,a.data.val_s);
     else maismenos(stack,a,-);
@@ -78,7 +78,7 @@ void menosmenos(Stack stack){//(
 /**
  *\brief função que recebe da stack um elemento e devolve esse elemento em double. ou o comprimento de uma string ou se uma array esta vazia
  */
-double toD (elemento a){
+double toD (struct stack_elemento a){
     switch (a.tipo){
         case STACK_DOUBLE:
             return a.data.val_d;break;
@@ -98,8 +98,8 @@ double toD (elemento a){
  * \brief equivalente à soma de dois valores ou a concatenação 
 */
 void mais(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (!concatarray(stack,a,b)){
     if (a.tipo==STACK_STRING||b.tipo==STACK_STRING) concatenastrings(stack,a,b);
     else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l + a.data.val_l);
@@ -109,7 +109,7 @@ void mais(Stack stack){
 /**
  * @brief auxiliar para dividir o caso concatenar a uma array o ou concatenar algo a uma array
  */
-int concatarray(Stack stack,elemento a,elemento b){
+int concatarray(Stack stack,struct stack_elemento a,struct stack_elemento b){
     if (b.tipo==STACK_STACK){
         concatenarAArrays(stack,b.data.stk,a);
         return 1;
@@ -124,8 +124,8 @@ int concatarray(Stack stack,elemento a,elemento b){
  * \brief equivalente à subtração de dois valores.
 */
 void menos(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l - a.data.val_l);
     else push(stack,STACK_DOUBLE,toD(b) - toD(a));
 }
@@ -144,7 +144,7 @@ void arraymult(Stack stack,Stack stk,double a){
 /**
  * @brief faz a multiplicação de strings
  */
-void strmult(Stack stack,elemento a,double n){
+void strmult(Stack stack,struct stack_elemento a,double n){
     char *d;
     d=(char *)malloc(sizeof(char)*strlen(a.data.val_s)*(int)n);
     strcpy(d,a.data.val_s);
@@ -159,8 +159,8 @@ void strmult(Stack stack,elemento a,double n){
  * 
  */
 void mult(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (!arraymulCasos(stack,a,b)){
         if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,b.data.val_l * a.data.val_l);
         else push(stack,STACK_DOUBLE,toD(b) * toD(a));
@@ -169,7 +169,7 @@ void mult(Stack stack){
 /**
  * @brief auxiliar para dividir o caso multiiplicar uma string/array
  */
-int arraymulCasos(Stack stack,elemento a,elemento b){
+int arraymulCasos(Stack stack,struct stack_elemento a,struct stack_elemento b){
     if (a.tipo==STACK_STACK){
         arraymult(stack,a.data.stk,toD(b));
         return 1;
@@ -196,8 +196,8 @@ int arraymulCasos(Stack stack,elemento a,elemento b){
  * \brief equivalente à divisão de dois valores ou a seperação de uma string por partes
 */
 void divisao(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (b.tipo==STACK_STRING || a.tipo==STACK_STRING) dividepor(stack,toS(b),toS(a));
     else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long)((int)b.data.val_l / (int)a.data.val_l));
     else push(stack,STACK_DOUBLE,toD(b) / toD(a));
@@ -206,8 +206,8 @@ void divisao(Stack stack){
  * \brief equivalente ao resto divisão inteira de dois valores.
 */
 void restoDivisao (Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_BLOCO) map(stack,b,a.data.val_s);
     else push(stack,STACK_LONG,(b.data.val_l%a.data.val_l));
 }
@@ -215,8 +215,8 @@ void restoDivisao (Stack stack){
  * \brief equivalente à exponenciação de valores.
 */
 void expoente (Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (b.tipo==STACK_STRING) procurasubstring(stack,b.data.val_s,toS(a));
     else if (a.tipo==STACK_LONG && b.tipo==STACK_LONG) push(stack,STACK_LONG,(long) (pow(toD(b),toD(a))));
     else push(stack,STACK_DOUBLE, pow(toD(b),toD(a)));
@@ -226,31 +226,31 @@ void expoente (Stack stack){
  * \brief equivalente à interseção dos bits correspondentes ao número.
 */
 void conjuncao(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     push(stack,STACK_LONG,(b.data.val_l & a.data.val_l));
 }
 /**
  * \brief equivalente à disjunção dos bits correspondentes ao número.
 */
 void disjuncao(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     push(stack,STACK_LONG,(b.data.val_l | a.data.val_l));
 }
 /**
  * \brief compara bits correspondentes a um número, atribuindo 1 sempre que são distintos.
 */
 void xor(Stack stack){
-    elemento a = pop(stack);\
-    elemento b = pop(stack);\
+    struct stack_elemento a = pop(stack);\
+    struct stack_elemento b = pop(stack);\
     push(stack,STACK_LONG,(b.data.val_l ^ a.data.val_l));
 }
 /**
  * \brief inverte os bits de um inteiro.
 */
 void not(Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     if (a.tipo==STACK_STACK) colocartodos(stack,a.data.stk);
     else if (a.tipo==STACK_BLOCO) aplicaBloco(stack,a.data.val_s);
     else push(stack,STACK_LONG,(~ a.data.val_l));
@@ -259,21 +259,21 @@ void not(Stack stack){
 * \brief função que vai buscar ao topo da stack um número e se este for diferente de 0 devolve o próprio 0 e, caso contrário, devolve 1.  
 */
 void notb(Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     push(stack,STACK_LONG,(! a.data.val_l));
 }
 /**
  * \brief duplica o topo da stack/ordena por um argumento.
  */
 void copian(Stack stack){
-    elemento p = pop(stack);
+    struct stack_elemento p = pop(stack);
     if (p.tipo==STACK_BLOCO){
-        elemento q = pop(stack);
+        struct stack_elemento q = pop(stack);
         ordenar(stack,q.data.stk,p.data.val_s);
     }
     else{
     long  a = p.data.val_l;
-    elemento t = stack->elemento[stack->comprimento-a];
+    struct stack_elemento t = stack->elemento[stack->comprimento-a];
     pushdata(stack,t);
     }
 }
@@ -281,8 +281,8 @@ void copian(Stack stack){
  * \brief troca de dois elementos da stack.
  */
 void trocar (Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     pushdata(stack,a);
     pushdata(stack,b);
 }
@@ -290,9 +290,9 @@ void trocar (Stack stack){
  * \brief Roda três elementos da stack.
  */
 void rodar (Stack stack){
-    elemento p1 = pop(stack);
-    elemento p2 = pop(stack);
-    elemento p3 = pop(stack);
+    struct stack_elemento p1 = pop(stack);
+    struct stack_elemento p2 = pop(stack);
+    struct stack_elemento p3 = pop(stack);
     pushdata (stack,p2);
     pushdata (stack,p1);
     pushdata (stack,p3);
@@ -301,7 +301,7 @@ void rodar (Stack stack){
  * \brief duplica um elemento da stack.
  */
 void duplica(Stack stack){
-    elemento p1 = pop(stack);
+    struct stack_elemento p1 = pop(stack);
     pushdata (stack,p1);
     pushdata (stack,p1);
 }
@@ -309,7 +309,7 @@ void duplica(Stack stack){
  * \brief função que converte os tipos existentes para long.
  */
 void convL (Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     switch(a.tipo){
         case STACK_CHAR:
             push(stack,STACK_LONG,(int)a.data.val_c);break;
@@ -327,7 +327,7 @@ void convL (Stack stack){
  * \brief função que converte os tipos existentes em double.
  */
 void convD (Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     switch(a.tipo){
         case STACK_CHAR:
             push(stack,STACK_DOUBLE,(double)a.data.val_c);break;
@@ -346,7 +346,7 @@ void convD (Stack stack){
  * \brief função que converte os tipos existentes em char.
  */
 void convC (Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     switch(a.tipo){
         case STACK_CHAR:
             push(stack,STACK_CHAR,a.data.val_c);break;
@@ -361,8 +361,8 @@ void convC (Stack stack){
 * \brief função que vai buscar ao topo da stack dois números e verifica se estes são iguais.  
 */
 void igual(Stack stack ){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) push(stack,STACK_LONG,!strcmp(a.data.val_s,b.data.val_s));
     else if (b.tipo==STACK_STRING) push(stack,STACK_CHAR,b.data.val_s[(int)toD(a)]);
     else if (b.tipo==STACK_STACK) pushdata(stack,b.data.stk->elemento[(int)toD(a)]);
@@ -372,8 +372,8 @@ void igual(Stack stack ){
  * \brief função que nos dá o maior de dois numeros existentes na stack(em binário).
  */
 void maior(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (b.tipo==STACK_STACK) retiraXDoFim(stack,b.data.stk,toD(a));
     else if (a.tipo==STACK_STRING) push(stack,STACK_LONG,strcmp(b.data.val_s,a.data.val_s)>0);
     else if (b.tipo==STACK_STRING){
@@ -386,8 +386,8 @@ void maior(Stack stack){
  * \brief função que nos dá o menor de dois numeros existentes na stack(em binário).
  */
 void menor(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (b.tipo==STACK_STACK) retiraXDoInicio(stack,b.data.stk,toD(a));
     else if (a.tipo==STACK_STRING) push(stack,STACK_LONG,strcmp(b.data.val_s,a.data.val_s)<0);
     else if (b.tipo==STACK_STRING){
@@ -401,8 +401,8 @@ void menor(Stack stack){
  * \brief função que nos dá o maior de dois numeros existentes na stack(sem binário).
  */
 void maiorb(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) pushdata(stack,(strcmp(b.data.val_s,a.data.val_s)>0)?b:a);
     else pushdata(stack,(toD(b) > toD(a)?b:a));
 }
@@ -410,8 +410,8 @@ void maiorb(Stack stack){
 * \brief função que nos dá o menor de dois numeros existentes na stack(sem binário).  
 */
 void menorb(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (a.tipo==STACK_STRING) pushdata(stack,((strcmp(b.data.val_s,a.data.val_s)<0)?b:a));
     else pushdata(stack,(toD(b) < toD(a)?b:a));
 }
@@ -419,15 +419,15 @@ void menorb(Stack stack){
 * \brief função que vai buscar 2 elementos ao topo da stack, se ambos forem falsos, retorna 0 , caso contrário, devolve o segundo.
 */
 void ou(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     pushdata(stack,(b.data.val_l?b:a));
 }
 
 /**
 * \brief função que delve o valor de um elemento sobre a forma de string
 */
-char * toS(elemento a){
+char * toS(struct stack_elemento a){
     char *c=NULL;
     switch (a.tipo) {
         case STACK_STRING:
@@ -450,7 +450,7 @@ char * toS(elemento a){
 /**
  * @brief junta dois elementos de tipo string em uma so e coloca-a na stack
  */
-void concatenastrings (Stack stack,elemento a,elemento b){
+void concatenastrings (Stack stack,struct stack_elemento a,struct stack_elemento b){
     char *as=toS(a),*bs=toS(b);
     char *c= (char *) malloc(sizeof(char)* (strlen(as)+ strlen(bs)));
     strcpy(c,bs);
@@ -462,8 +462,8 @@ void concatenastrings (Stack stack,elemento a,elemento b){
 * \brief função que vai buscar 2 elementos ao topo da stack, se um deles for falso, retorna 0 , caso contrário, devolve o primeiro.  
 */
 void e(Stack stack){
-    elemento a = pop(stack);
-    elemento b = pop(stack);
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b = pop(stack);
     if (toD(a)&&toD(b)) pushdata(stack,a);
     else push(stack,STACK_LONG,0);
 }
@@ -471,9 +471,9 @@ void e(Stack stack){
 * \brief função que vai buscar ao topo da stack 3 elementos, se o elemento que estiver em terceiro lugar for verdadeiro, então coloca na stack o segundo, caso contrário coloca o primeiro.  
 */
 void ifthenelse(Stack stack){
-    elemento e = pop(stack);
-    elemento t = pop(stack);
-    elemento i = pop(stack);
+    struct stack_elemento e = pop(stack);
+    struct stack_elemento t = pop(stack);
+    struct stack_elemento i = pop(stack);
     pushdata(stack,(toD(i)?t:e));
 }
 
@@ -495,8 +495,8 @@ void stack2var(Stack stack,char s){
  * @brief funçao que dependendo do que esta na stack devolve quantos elementos existem numa array/string ou cria um array com os numeros inteiros de 0 a N
  */
 void virgula(Stack stack){
-    elemento a = pop(stack);
-    elemento b;
+    struct stack_elemento a = pop(stack);
+    struct stack_elemento b;
     switch (a.tipo){
         case (STACK_STACK):
             push(stack,STACK_LONG,stacklen(a.data.stk)+1);break;
@@ -514,7 +514,7 @@ void virgula(Stack stack){
 /**
  * @brief função que cria um array com os numeros inteiros de 0 a valor de a
  */
-void range(Stack stack,elemento a){
+void range(Stack stack,struct stack_elemento a){
     Stack stk=create(stack);
     for (int i = 0;i<toD(a);i++){
         push(stk,STACK_LONG,i);
@@ -536,7 +536,7 @@ void colocartodos(Stack stack,Stack stk){
  */
 void divideporespacos (Stack stack){
     Stack stk=create(stack);
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     if (*a.data.val_s){
         char *token = strtok(a.data.val_s,"\t \n");
         while(token != NULL){
@@ -552,7 +552,7 @@ void divideporespacos (Stack stack){
  */
 void dividepornewline (Stack stack){
     Stack stk=create(stack);
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     char *token;
     if (*a.data.val_s){
         while ((token = strtok_r(a.data.val_s, "\n", &a.data.val_s))){
@@ -638,7 +638,7 @@ void procurasubstring (Stack stack,char c[],char c1[]){
 /**
  * @brief junta a um elemento todos os elementos de uma array e coloca-os num array dentro da stack
  */
-void concatenarDeArrays (Stack stack,elemento a,Stack stk1){
+void concatenarDeArrays (Stack stack,struct stack_elemento a,Stack stk1){
     Stack stk;
     switch (a.tipo){
         case (STACK_STACK):
@@ -653,7 +653,7 @@ void concatenarDeArrays (Stack stack,elemento a,Stack stk1){
 /**
  * @brief junta aos elementos de uma array um elemnto e guarda a array  dentro da stack
  */
-void concatenarAArrays (Stack stack,Stack stk1,elemento a){
+void concatenarAArrays (Stack stack,Stack stk1,struct stack_elemento a){
     switch (a.tipo){
         case (STACK_STACK):
             colocartodos(stk1,a.data.stk);break;
@@ -685,8 +685,8 @@ void retiraXDoInicio(Stack stack,Stack stk,double n){
 /**
  * @brief copia um elemento para uma nova variavel e devolve a copia do elemento
  */
-elemento copiaElem(elemento a){
-    elemento b;
+struct stack_elemento copiaElem(struct stack_elemento a){
+    struct stack_elemento b;
     switch (a.tipo) {
         case STACK_LONG:
             b.data.val_l=a.data.val_l;break;
@@ -720,8 +720,8 @@ elemento copiaElem(elemento a){
 /**
  * @brief Recebe uma string, remove o elemento mais a esquerda, e devolve esse elemento sob a forma de elemento.
  */
-elemento popLS(char i[]){
-    elemento r;
+struct stack_elemento popLS(char i[]){
+    struct stack_elemento r;
     r.tipo=STACK_CHAR;
     r.data.val_c=i[0];
     return r;
@@ -738,7 +738,7 @@ void aplicaBloco(Stack stack,char c[]){
 /**
  * @brief Função que engloba os dois tipos de maps existentes.
  */
-void map(Stack stack,elemento a,char c[]){
+void map(Stack stack,struct stack_elemento a,char c[]){
     switch (a.tipo){
         case STACK_STRING:
             mapS(stack,a.data.val_s,c);break;
@@ -784,7 +784,7 @@ void mapA(Stack stack,Stack stk,char c[]){
 /**
  * @brief Função que engloba os dois tipos de filters existentes.
  */
-void filter(Stack stack, elemento a,char c[]){
+void filter(Stack stack, struct stack_elemento a,char c[]){
     switch (a.tipo){
     case STACK_STRING:
         filterS(stack,a.data.val_s,c);break;
@@ -800,7 +800,7 @@ void filter(Stack stack, elemento a,char c[]){
  */
 void filterA(Stack stack,Stack stk,char c[]){
     char *d;
-    elemento copia;
+    struct stack_elemento copia;
     Stack stk1 = create(stack);
     while (stk->comprimento!=-1){
         d = strdup(c);
@@ -816,7 +816,7 @@ void filterA(Stack stack,Stack stk,char c[]){
  * @brief Função que faz o filter de uma string.
  */
 void filterS(Stack stack,char in[],char c[]){
-    elemento caracter,copia;
+    struct stack_elemento caracter,copia;
     char *d,*out= (char *) malloc(sizeof(char)*strlen(in));
     while (in[0]!='\0'){
         d = strdup(c);
@@ -846,7 +846,7 @@ void fold(Stack stack,Stack stk, char c[]){
 /**
  * @brief função auxiliar da guardaempares, que identifica qual o tipo do elemento recebido.
  */
-elemento guardaemparesAux(elemento a){
+struct stack_elemento guardaemparesAux(struct stack_elemento a){
     switch(a.tipo){
         case STACK_STRING:
             break;
@@ -863,7 +863,7 @@ elemento guardaemparesAux(elemento a){
  */
 void guardaempares(Stack stk,Stack stk1,char c[],int comp,par *pares){
     char *d;
-    elemento copia;
+    struct stack_elemento copia;
     for (int i=0;i<=comp;i++){
         d = strdup(c);
         copia=popL(stk);
@@ -927,7 +927,7 @@ void ordenar(Stack stack,Stack stk,char c[]){
  * @brief enquanto o resultado de aplicar um bloco a um elemento for verdade aplica o bloco a cada um dos elementos da array.
  */
 void w(Stack stack){
-    elemento a = pop(stack);
+    struct stack_elemento a = pop(stack);
     char *c = a.data.val_s,*d;
     while(toD(a)){
         d=strdup(c);

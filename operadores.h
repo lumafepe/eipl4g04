@@ -11,7 +11,7 @@ void arraymult(Stack stack,Stack stk,double a);
  * @param a elemento com a string a copiar
  * @param n numero de repetiçoes da string
  */
-void strmult(Stack stack,elemento a,double n);
+void strmult(Stack stack,struct stack_elemento a,double n);
 /**
  * @param stack é a stack onde guardar os valores
  * @param stk array de onde remover o elemento
@@ -30,7 +30,7 @@ void menosmenos(Stack stack);
  * @param a é um elemento da nossa stack.
  * @return devolve em double o elemento da stack.
  */
-double toD (elemento a);
+double toD (struct stack_elemento a);
 /**
  * @param stack é a stack onde os valores estao guardados.
  */
@@ -154,7 +154,7 @@ void virgula(Stack stack);
  * @param stack é a stack onde os valores estao guardados
  * @param a elemento que contem o numero onde parar a criação de numeros
  */
-void range(Stack stack,elemento a);
+void range(Stack stack,struct stack_elemento a);
 /**
  * @param stack é a stack/array onde os valores vao ser guardados
  * @param stk é a stack/array de onde copiar os valores
@@ -165,13 +165,13 @@ void colocartodos(Stack stack,Stack stk);
  * @param a elemento a quem juntar a array
  * @param stk1 array de onde ir buscar os valores a juntar
  */
-void concatenarDeArrays (Stack stack,elemento a,Stack stk1);
+void concatenarDeArrays (Stack stack,struct stack_elemento a,Stack stk1);
 /**
  * @param stack é a stack onde os valores estao guardados
  * @param stk1 array a quem concatenar um valor
  * @param a elemnto a concatenar
  */
-void concatenarAArrays (Stack stack,Stack stk1,elemento a);
+void concatenarAArrays (Stack stack,Stack stk1,struct stack_elemento a);
 /**
  * @param stack é a stack onde os valores estao guardados
  */
@@ -197,7 +197,7 @@ void procurasubstring (Stack stack,char c[],char c1[]);
  * @param a é o elemento onde esta a primeira string a concatenar
  * @param b é o elemento onde esta a segunda string a concatenar
  */
-void concatenastrings (Stack stack,elemento a,elemento b);
+void concatenastrings (Stack stack,struct stack_elemento a,struct stack_elemento b);
 /**
  * @param stack é a stack onde os valores estao guardados
  * @param stk array de onde remover o elemento
@@ -219,7 +219,7 @@ void retiraXDoInicio(Stack stack,Stack stk,double n);
  * @param a elemento a tornar em char
  * @return string correspondente ao elemento
  */
-char * toS(elemento a);
+char * toS(struct stack_elemento a);
 /**
  * @param stack é a stack onde os valores estao guardados
  * @param c string de onde remover o elemento
@@ -234,7 +234,7 @@ void menosmenosS(Stack stack,char c[]);
  * @param a elemento a criar copia
  * @return copia do elemento original 
  */
-elemento copiaElem(elemento a);
+struct stack_elemento copiaElem(struct stack_elemento a);
 /**
  * @param stack onde os valores estao guardados.
  */
@@ -245,13 +245,13 @@ void convS(Stack stack);
  * @param b segundo elemento a ordenar 
  * @return 1 se algum caso ocorreu
  */
-int concatarray(Stack stack,elemento a,elemento b);
+int concatarray(Stack stack,struct stack_elemento a,struct stack_elemento b);
 /**
  * @param stack stack onde estao os valores e onde guardar
  * @param a primeiro elemento a multiplicar
  * @param b segundo elemento a multiplicar
  */
-int arraymulCasos(Stack stack,elemento a,elemento b);
+int arraymulCasos(Stack stack,struct stack_elemento a,struct stack_elemento b);
 
 /**
  * @param stack stack onde estao os valores e onde guardar.
@@ -263,7 +263,7 @@ void aplicaBloco(Stack stack,char c[]);
  * @param a elemento da stack.
  * @param c array que vamos receber como input.
  */
-void map(Stack stack,elemento a,char c[]);
+void map(Stack stack,struct stack_elemento a,char c[]);
 /**
  * @param stack stack onde estao os valores e onde guardar.
  * @param stk stack que contem os valores sujeitos a alteração.
@@ -281,7 +281,7 @@ void mapS(Stack stack,char in[],char c[]);
  * @param a array/string a aplicar o bloco
  * @param c bloco a aplicar
  */
-void filter(Stack stack, elemento a,char c[]);
+void filter(Stack stack, struct stack_elemento a,char c[]);
 /**
  * @param stack stack onde os valores estao guardados
  * @param stk array a aplicar o bloco
@@ -304,14 +304,14 @@ void fold(Stack stack,Stack stk, char c[]);
  * @param i string a remover 1º elemento
  * @return primeiro caracter sob a forma de elemento
  */
-elemento popLS(char i[]);
+struct stack_elemento popLS(char i[]);
 /**
  * tipo de um par
  * @brief define um elemento e o valor de lhe aplicar um bloco
  */
 typedef struct pardevalores{
-    elemento elemento;/**< representa o elemento original */
-    elemento valor;/**< representa o valor pos aplicar o bloco */
+    struct stack_elemento elemento;/**< representa o elemento original */
+    struct stack_elemento valor;/**< representa o valor pos aplicar o bloco */
 }par;
 /**
  * @param stack onde os valores estam guardados
@@ -354,7 +354,8 @@ int contadigitos(int i);
 void print_topo(Stack stack);
 /**
  * @param stk array onde guardar
- * @param c string a dar explode
+ * @param c sttring a dar explode
+ * 
  */
-void separaString(Stack stk,char c[]);
+void separaString(Stack stk,char c[])
 #endif
