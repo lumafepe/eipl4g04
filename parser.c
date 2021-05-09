@@ -304,8 +304,7 @@ char * leitura2(Stack stack, char *rest){
         switch (rest[0]){
             case ('{'):
                 rest++;
-                rest=lerBlocoAux(stack,rest);
-                break;
+                rest=lerBlocoAux(stack,rest);break;
             case ('['):
                 rest=lerArrayAux(stack,rest);break;
             case (']'):
@@ -315,16 +314,14 @@ char * leitura2(Stack stack, char *rest){
                 rest++;
                 if(*rest=='\"') {push(stack,STACK_STRING,""); rest++;}
                 else if ((token=strtok_r(rest, "\"",&rest))) push(stack,STACK_STRING,token);
-                else Bool=0;
-                break;
+                else Bool=0;break;
             case ' ':
                 rest++;break;
             case '\n':
                 Bool=0;break;
             default:
                 if ((token = strtok_r(rest, " ", &rest))) leitura3(stack,token);
-                else Bool=0;
-                    break;
+                else Bool=0;break;
             }
     }
     return rest;
