@@ -357,5 +357,5 @@ void print_topo(Stack stack);
  * @param c sttring a dar explode
  * 
  */
-void separaString(Stack stk,char c[])
+void separaString(Stack stk,char c[]);
 #endif

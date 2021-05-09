@@ -433,14 +433,14 @@ char * toS(struct stack_elemento a){
         case STACK_STRING:
             c = a.data.val_s;break;
         case STACK_CHAR:
-            c=(char *) malloc(sizeof(char));
+            c=(char *) malloc(2*sizeof(char));
             c[0]=a.data.val_c;
             c[1]='\0';break;
         case STACK_DOUBLE:
-            c=(char *) malloc(sizeof(char)*contadigitos(a.data.val_d));
+            c=(char *) calloc(contadigitos(a.data.val_d),sizeof(char));
             sprintf(c,"%f",a.data.val_d);break;
         case STACK_LONG:
-            c=(char *) malloc(sizeof(char)*contadigitos(a.data.val_l));
+            c=(char *) calloc(contadigitos(a.data.val_l),sizeof(char));
             sprintf(c,"%d",(int)a.data.val_l);break;
         default:
             break;
@@ -752,7 +752,7 @@ void map(Stack stack,struct stack_elemento a,char c[]){
  */
 void mapS(Stack stack,char in[],char c[]){
     char *d;
-    char *out= (char *) malloc(sizeof(char)*strlen(in));
+    char *out= (char *) calloc(strlen(in),sizeof(char));
     while (in[0]!='\0'){
         d = strdup(c);
         pushdata(stack,popLS(in++));
@@ -817,7 +817,7 @@ void filterA(Stack stack,Stack stk,char c[]){
  */
 void filterS(Stack stack,char in[],char c[]){
     struct stack_elemento caracter,copia;
-    char *d,*out= (char *) malloc(sizeof(char)*strlen(in));
+    char *d,*out= (char *) calloc(strlen(in),sizeof(char));
     while (in[0]!='\0'){
         d = strdup(c);
         copia=popLS(in++);
